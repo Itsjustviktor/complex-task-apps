@@ -1,0 +1,219 @@
+﻿@page "/Lens"
+@inject GoodService Service
+@inject NavigationManager NavigationManager
+<html>
+
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+
+            <div class="breadcrumb-wrapper">
+
+                <ul class="breadcrumb1">
+
+                    <li class="breadcrumb-item home">
+                        <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                    </li>
+
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-link current-page">Объективы</span>
+                    </li>
+
+                </ul>
+            </div> <!--назад-->
+            <div class="row">
+
+                <div class="page-sidebar cell-3 cell-4-md hide-sm">
+                    <div class="collection-menu-wrapper sidebar-block">
+                        <div class="collection-menu-header sidebar-block-header">
+                            Каталог
+                        </div>
+                        <ul class="collection-menu menu level-1">
+                            <li class="collection-menu-item menu-item level-1 is-active">
+                                <a href="/Ph" class="collection-menu-link menu-link level-1">Фотоаппараты</a>
+                                <ul class="collection-menu menu level-2">
+
+                                    <li class="collection-menu-item menu-item level-2 ">
+                                        —<a href="/Phwithmirror" class="collection-menu-link menu-link level-2">Зеркальные</a>
+                                    </li>
+
+                                    <li class="collection-menu-item menu-item level-2 ">
+                                        —<a href="/Phwithoutmirror" class="collection-menu-link menu-link level-2">Беззеркальные</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            <li class="collection-menu-item menu-item level-1  is-current">
+                                <a href="/Lens" class="collection-menu-link menu-link level-1">Объективы</a>
+                            </li>
+
+                            <li class="collection-menu-item menu-item level-1">
+
+                                <a href="/Light" class="collection-menu-link menu-link level-1">Световые приборы</a>
+
+                            </li>
+
+                        </ul>
+                        <!--Каталог-->
+                    </div>
+
+                    <form class="collection-filter">
+
+
+                        <div class="collection-filter-header">
+                            Фильтр
+                        </div>
+
+                        <div class="filter is-active">
+                            <a class="filter-toggle">
+                                <div class="filter-control">
+                                    <span class="filter-name">Тип матрицы</span>
+                                </div>
+                            </a>
+                            <div class="filter-items-wrapper">
+
+                                <ul class="filter-items-list scrollable">
+
+                                    <li class="filter-item">
+                                        <input class="radbut" type="radio" id="huey" name="drone" value="impuls"
+                                               checked>
+                                        <label class="radbutL" for="impuls">На полнокадровую матрицу</label>
+                                    </li>
+
+                                    <li class="filter-item">
+                                        <input class="radbut" type="radio" id="huey" name="drone" value="impuls"
+                                               checked>
+                                        <label class="radbutL" for="impuls">На кропнутую матрицу</label>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                        <button type="submit" class="filter-submit button is-primary">Применить</button>
+                        <a href="/collection/fotoapparaty" type="button" class="filters-clear button">Сбросить фильтры</a>
+                    </form>
+
+                </div>
+
+                <div class="page-content cell-9 cell-8-md cell-12-sm">
+
+                    <div class="decorated-title-wrapper">
+                        <div class="decorated-title">
+
+                            <div class="page-header-wrapper">
+                                <h1 class="page-header">
+                                    Объективы
+                                </h1>
+                            </div>
+
+                        </div>
+                        <!-- шапка-->
+
+                        <div class="collection-toolbar is-top">
+
+                            <button type="button" class="button hide show-sm is-primary" data-type="panel">Фильтр</button>
+                            <form class="collection-order-wrapper " action="/collection/noutbuki">
+                                <div class="collection-order is-order  ">
+                                    <label class="label-field hide">Сортировка</label>
+
+                                    <select class="select-field" name="order" @onchange="sort">
+                                        <option value="">Сортировка</option>
+                                        <option value="price">По возрастанию цены</option>
+                                        <option value="descending_price">По убыванию цены</option>
+                                    </select>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <!--сортировка-->
+                    </div>
+
+
+                    <div class="collection-description at-top content editor">
+                        <p><img src="https://i.imgur.com/61O4mHc.png" alt=""></p>
+                        <p><span style="font-size: 12pt;">Купить объектив очень просто: достаточно оформить заказ онлайн. Консультанты нашего магазина всегда готовы прийти Вам на помощь – воспользовавшись их советами, Вы сможете выбрать для себя подходящий объектив.<br></span></p>
+                    </div>
+                    <!--Плашка о-->
+
+
+                    <div class="products-list row">
+
+                        @foreach (var i in sortedgood)
+                        {
+                        <div class="product-card-wrapper cell-4 cell-6-md cell-12-mc">
+                            <a class="product-card product-link" @onclick="(()=>namesend(i.Idgood))">
+                                <div class="card-inner ">
+                                    <div class="product-photo">
+                                        <div class="product-link image-container is-square ">
+                                            <img src="@i.Picture" alt="" title="" class="product-image">
+                                        </div>
+                                        <div class="product-prices in-card">
+                                            <div class="price in-card">
+                                                @i.Price&nbsp;руб
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption product-link">
+                                        <div class="product-title in-card">
+                                            @i.Name
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        }
+                    </div>
+                    <!--Продукты-->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    string name;
+    string pic;
+    double price;
+    public IList<Good> good;
+    public List<Good> sortedgood = new List<Good>();
+    public static int idTovar;
+    private void namesend(int id)
+    {
+        idTovar = id;
+        NavigationManager.NavigateTo("/Good");
+    }
+    protected override void OnInitialized()
+    {
+        good = Service.GetGoods();
+        foreach (var i in good)
+        {
+            if (i.Category == "объектив" && i.Quantity >= 1)
+            {
+                sortedgood.Add(i);
+            }
+        }
+    }
+    private void sort(ChangeEventArgs eventArgs)
+    {
+        Console.WriteLine(eventArgs.Value.ToString());
+        if (eventArgs.Value.ToString() == "price")
+        {
+            sortedgood = sortedgood.OrderBy(C => C.Price).ToList();
+            Console.WriteLine("зашел в прайс");
+        }
+        if (eventArgs.Value.ToString() == "descending_price")
+        {
+            sortedgood = sortedgood.OrderByDescending(C => C.Price).ToList();
+            Console.WriteLine("зашел в дпрайс");
+        }
+    }
+}

@@ -1,0 +1,132 @@
+﻿@page "/Auth"
+@inject UserService Service
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
+@inject NavigationManager NavigationManager
+
+<html>
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+            <div class="page-content checkout-v1-wrapper ">
+
+                <div class="wrapper body fc">
+
+                    <div class="decorated-title-wrapper">
+                        <div class="decorated-title">
+                            <div class="page-header-wrapper">
+                                <h1 class="page-header">Вход в личный кабинет</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="flash_messages"></div>
+
+                    <div id="top_info"></div>
+
+                    <div class="set wide_set">
+                        <form accept-charset="UTF-8" method="post">
+                            <div class="set-block small_label">
+                                <div class="field fc">
+                                    <div class="field-label">Email:</div>
+                                    <div class="field-content">
+                                        <input type="text" name="email" @bind-value="email" @bind-value:event="oninput" class="textfield" style="width: 200px;">
+                                    </div>
+                                </div>
+                                <div class="field fc">
+                                    <div class="field-label">Пароль:</div>
+                                    <div class="field-content">
+                                        <input type="password" name="password" @bind-value="pass" @bind-value:event="oninput" class="textfield" style="width: 200px;">
+                                    </div>
+                                </div>
+
+                                <div class="field-label"><font color="red">@divsuccess</font> </div>
+
+                                <div class="field fc">
+                                    <div class="field-content">
+                                        <input class="button" name="commit" @onclick="success" value="Войти">
+                                    </div>
+                                </div>
+                                <div class="field fc">
+                                    <div class="field-content">
+                                        <a href="/Reg">Зарегистрироваться</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+@code {
+
+    string pass;
+    string email;
+    public static string mailHead;
+    string divsuccess = null;
+    public IList<Buyer> buyer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        buyer = Service.GetBuyer();
+        email = await oLocalStore.GetItemAsync<string>("MySessionValue");
+    }
+
+    private void emailsend(string e)
+    {
+
+        Header.Email = e;
+        email = e;
+        //mailHead = email;
+        //Header.changeemail(email);
+        //(() => emailsend(email))
+    }
+
+    public async void SaveSession()
+    {
+        await oLocalStore.SetItemAsync("MySessionValue", email);
+    }
+
+    public void success()
+    {
+        Buyer buyer1 = null;
+        @foreach (var i in buyer)
+        {
+            if (email == i.Emailbuyer)
+            {
+                buyer1 = i;
+            }
+        }
+
+        if (buyer1 == null)
+        {
+            divsuccess = "";
+            divsuccess = "пользователя с таким email не существует";
+            return;
+        }
+        if (buyer1.Password == pass)
+        {
+            divsuccess = null;
+            SaveSession();
+            NavigationManager.NavigateTo("/Lk");
+            emailsend(buyer1.Emailbuyer);
+            return;
+        }//авторизация и сохранение сессии
+
+        else
+        {
+            divsuccess = "";
+            divsuccess = "неправильный пароль";
+            return;
+        }
+
+    }
+
+
+}

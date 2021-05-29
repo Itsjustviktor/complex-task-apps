@@ -1,0 +1,104 @@
+﻿@page "/Lk"
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
+@inject UserService Service
+@inject NavigationManager NavigationManager
+<html>
+
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+
+            <div class="wrapper body fc">
+
+                <div class="userbar fc">
+                    <div class="profile fr" style="margin-bottom: 2rem; margin-top: 2rem; text-align: right">
+                        Здравствуйте, @name @name2 @name3 
+                        <b></b>
+                        (<a style="color: #0094ff;" class="endsess" @onclick="ClearSession">Выход</a>) <!--очистка сессии-->
+                    </div>
+                </div>
+
+                <div class="decorated-title-wrapper">
+                    <div class="decorated-title">
+                        <div class="page-header-wrapper">
+                            <h1 class="page-header">
+                                Кабинет покупателя. Заказы
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="set wide_set">
+
+                    <div class="set-title">История заказов</div>
+                    <div class="set-block">
+
+                        <table class="table table1">
+                            <thead>
+                                <tr>
+                                    <th>Номер заказа</th>
+                                    <th>Дата оформления</th>
+                                    <th>Статус</th>
+                                    <th>Оплата</th>
+                                    <th class="order_amount">Сумма заказа</th>
+                                    <th>Трек-номер</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr class="highlited_row ">
+                                    <td><a><div>1222</div></a></td>
+                                    <td><a><div>27.05.2021 22:05</div></a></td>
+                                    <td><a><div>Принят</div></a></td>
+                                    <td>
+                                        <a>
+                                            <div>
+                                                <span>
+                                                    Не оплачен
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td><a><div>44999&nbsp;руб</div></a></td>
+                                    <td><a><div>ARU899237432</div></a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+    double price;
+    public IList<Buyer> buyer;
+    string email, name, name2, name3;
+    protected override async Task OnInitializedAsync()
+    {
+        email = await oLocalStore.GetItemAsync<string>("MySessionValue");
+        buyer = Service.GetBuyer();
+        foreach (var i in buyer)
+        {
+            if (i.Emailbuyer == email)
+            {
+                name = i.First;
+                name2 = i.Second;
+                name3 = i.Third;
+            }
+        }
+    }
+
+    public async void ClearSession()
+    {
+        Header.changeemail(null);
+        Header.Email = null;
+        await oLocalStore.ClearAsync();
+        NavigationManager.NavigateTo("/");
+    }//очистка сессии
+}

@@ -1,0 +1,400 @@
+﻿@inherits LayoutComponentBase
+@page "/"
+@inject GoodService Service
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="css/site.css">
+    <style type="text/css">
+        .image-container.is-rectangle, .image-container.is-square, .image-container.is-rectangle-widget-blogs, .image-container.is-rounded {
+            height: 0;
+            padding-top: 130%;
+            position: relative;
+        }
+
+            .image-container.is-rectangle img, .image-container.is-square img, .image-container.is-rectangle-widget-blogs img, .image-container.is-rounded img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                max-height: 100%;
+                max-width: 100%;
+            }
+
+        .image-container {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+            .image-container.is-square {
+                padding-top: 100%;
+            }
+
+            .image-container.is-rectangle-widget-blogs {
+                padding-top: 68%;
+            }
+
+            .image-container.is-rounded {
+                overflow: hidden;
+                border-radius: 50%;
+            }
+
+            .image-container.is-cover {
+                overflow: hidden;
+            }
+
+                .image-container.is-cover img {
+                    height: 100%;
+                    max-width: none;
+                    max-height: none;
+                }
+
+                .image-container.is-cover.with-trick {
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                    .image-container.is-cover.with-trick img {
+                        display: none;
+                    }
+    </style>
+    <style>
+        .fc.old-theme-fix {
+            overflow: visible;
+        }
+
+            .fc.old-theme-fix:after {
+                clear: both;
+                display: block;
+                content: '';
+            }
+
+        .tt-dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+            min-width: 160px;
+            margin-top: 2px;
+            padding: 5px 5px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            background-clip: padding-box;
+        }
+
+        .twitter-typeahead {
+            display: inherit !important;
+        }
+
+            .twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+                margin-bottom: 0;
+            }
+
+        .tt-suggestion, .tt-footer {
+            display: block;
+            padding: 1px 0px 1px 10px;
+        }
+
+            .tt-suggestion.tt-is-under-cursor, .tt-footer.tt-is-under-cursor {
+                color: #fff;
+                background-color: #428bca;
+            }
+
+                .tt-suggestion.tt-is-under-cursor a, .tt-footer.tt-is-under-cursor a {
+                    color: #fff;
+                }
+
+            .tt-suggestion.tt-cursor, .tt-footer.tt-cursor {
+                color: #fff;
+                background-color: #428bca;
+            }
+
+            .tt-suggestion p, .tt-footer p {
+                margin: 0;
+            }
+    </style>
+
+</head>
+
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+            <div class="index-block promo-slider-wrapper">
+                <div class="promo-slider swiper-container swiper-container-horizontal swiper-container-autoheight">
+                    <div class="swiper-wrapper">
+                        <div class="promo-slide swiper-slide swiper-slide-active">
+                            <span class="slide-inner">
+                                <img class="slide-image" src="https://i.pinimg.com/originals/ce/58/7f/ce587ff061b05f5e444c01b1732cf94b.jpg" alt="Быстрая доставка до двери">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="promo-slider-prev swiper-button-disabled"><i class="fa fa-angle-left"></i></div>
+                    <div class="promo-slider-next swiper-button-disabled"><i class="fa fa-angle-right"></i></div>
+                </div>
+            </div> <!--картинка-->
+
+            <div class="index-block benefits-wrapper">
+                <div class="benefits">
+                    <div class="decorated-title-wrapper">
+                        <div class="decorated-title">
+                            Преимущества компании
+                        </div>
+                    </div>
+
+                    <div class="row flex-center">
+                        <span class="benefit cell-12-sm">
+                            <div class="benefit-inner">
+                                <div class="benefit-image">
+                                    <div class="image-container is-square">
+                                        <img src="https://static-sl.insales.ru/files/1/1526/2532854/original/a96ab3b07fa89099ef09c0a5553b9fda.png" title="Быстрая доставка до двери" alt="Быстрая доставка до двери">
+                                    </div>
+
+                                </div>
+                                <div class="benefit-title">Быстрая доставка до двери</div>
+                            </div>
+                        </span>
+
+                        <span class="benefit cell-12-sm">
+                            <div class="benefit-inner">
+                                <div class="benefit-image">
+                                    <div class="image-container is-square">
+                                        <img src="https://static-sl.insales.ru/files/1/1527/2532855/original/a751029d63eacb7fb3366ad7e3b7bbba.png" title="Выгодные акции и бонусы" alt="Выгодные акции и бонусы">
+                                    </div>
+                                </div>
+                                <div class="benefit-title">Самые низкие цены</div>
+                            </div>
+                        </span>
+                        <span class="benefit cell-12-sm">
+                            <div class="benefit-inner">
+                                <div class="benefit-image">
+                                    <div class="image-container is-square">
+                                        <img src="https://static-sl.insales.ru/files/1/1528/2532856/original/99ffcec5ea28987e98a65df296dc176f.png" title="Гарантии качества продукции" alt="Гарантии качества продукции">
+                                    </div>
+                                </div>
+                                <div class="benefit-title">Гарантии качества продукции</div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div> <!--преимущества-->
+
+            <div class="index-block title-collections">
+                <div class="tabs-menu-wrapper">
+                    <ul class="tabs-menu collections-tabs">
+                        <li class="tabs-menu-item active is-active">
+                            <a class="tabs-menu-link" data-toggle="tabs">Новинки</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tabs-list collections-list">
+                    <div class="tab-block active is-active" id="domashnie-kinoteatry">
+                        <div class="products-list in-tab row">
+
+                            @foreach (var i in sortedgood)
+                            {
+                                <div class="title-collections-product cell-3 cell-6-sm cell-12-mc">
+                                    <a class="product-card product-link" @onclick="(() => namesend(i.Idgood))">
+                                        <div class="card-inner">
+                                            <div class="product-photo">
+
+                                                <div class="product-link image-container is-square ">
+
+                                                    <img src="@i.Picture" alt="" title="" class="product-image">
+                                                </div>
+
+                                                <div class="product-prices in-card">
+                                                    <div class="price in-card">
+                                                        @i.Price&nbsp;руб
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="product-caption">
+                                                <div class="product-title in-card">
+                                                    @i.Name
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!--новые товары-->
+
+            <div class="widget-reviews-wrapper">
+                <div class="decorated-title-wrapper">
+                    <div class="decorated-title">
+                        Отзывы
+                    </div>
+                </div>
+                <div class="reviews-blocks ">
+                    <div class="review  is-top-cell is-top">
+                        <div class="review-inner is-top">
+
+                            <div class="review-image">
+                                <div class="image-container is-square is-cover is-rounded is-">
+                                    <img src="https://sun9-73.userapi.com/impg/7oU33rPEIctcH1qelhNQlDRGcEFl9-tbvuIGoA/dtsHI1M5mCc.jpg?size=1024x1024&quality=96&sign=34803e2b8200443e6dbc3796d5b242ee&type=album" title="Денис" alt="Денис">
+                                </div>
+                            </div>
+
+                            <div class="review-content">
+
+                                <div class="user-name">
+                                    Денис
+                                </div>
+
+                                <div class="review-content ">
+                                    <div class=" editor">
+                                        Хороший магазин. Продавец предложил несколько вариантов товара, обсудили все нюансы. Очень понравилась обратная связь!
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review  is-top-cell is-top">
+                        <div class="review-inner is-top">
+
+                            <div class="review-image">
+                                <div class="image-container is-square is-cover is-rounded is-">
+                                    <img src="https://sun9-67.userapi.com/impg/eaAa4LRI-Hf-z8-bGfAmvKPmXpHACMbOM-tBlg/pbOpBH9eUd8.jpg?size=1024x1024&quality=96&sign=170a1aae160e162a551cdee451579c2a&type=album" title="Алексей" alt="Алексей">
+                                </div>
+                            </div>
+                            <div class="review-content">
+                                <div class="user-name">
+                                    Алексей
+                                </div>
+
+                                <div class="review-content ">
+                                    <div class=" editor">
+                                        Заказывал новый объектив для жены. Магазин  оперативно перезвонил, курьер приехал в тот же день и доставил заказ.  В общем, жена осталась довольной, спасибо!
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review  is-top-cell is-top">
+                        <div class="review-inner is-top">
+
+                            <div class="review-image">
+                                <div class="image-container is-square is-cover is-rounded is-">
+                                    <img src="https://sun9-9.userapi.com/impg/fuNROmAf3_-hCaPHe_phE4j0SsUXzbD7C1UKqg/bkSi1Y_nnGs.jpg?size=1024x1024&quality=96&sign=ebae6ac296b31384f199a4baa8535436&type=album" title="Мия" alt="Мия">
+                                </div>
+                            </div>
+
+                            <div class="review-content">
+
+                                <div class="user-name">
+                                    Мия
+                                </div>
+
+
+                                <div class="review-content ">
+                                    <div class=" editor">
+                                        Заказывала камеру sony a6500. Долго искала эту модель в других магазинах, но нашла только у вас. Заказ привезли в Нижний Новгород всего через 3 дня после оформления заказа. Большое спасибо за быструю доставку!
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> <!--Отзывы-->
+
+            <div class="feedback-wrapper">
+                <div class="feedback">
+                    <div class="feedback-heading">
+                        Форма обратной связи
+                    </div>
+                    <form class="feedback-form form" method="post" data-max-send="5">
+                        <div class="form-row form-ui">
+                            <p class="form-title">Имя</p>
+                            <input type="text" name="name" value="" class="widget-form-field" required="">
+                        </div>
+
+                        <div class="form-row form-ui">
+                            <p class="form-title">Телефон</p>
+                            <input type="text" name="phone" value="" class="widget-form-field" required="">
+                        </div>
+
+                        <div class="form-row form-ui">
+                            <button type="submit" name="button" class="button button-primary button-widget-feedback">
+                                <span class="button-text">Отправить</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div> <!--обратная связь-->
+
+            <div class="index-block title-content">
+                <div class="decorated-title-wrapper">
+                    <div class="decorated-title">
+
+                        <div class="page-header-wrapper">
+                            <h1 class="page-header">
+                                <span class="insales-editable-content" style="position: relative; display: none;" id="mce_1" spellcheck="false">О магазине</span>
+                                <span class="insales-editable" data-resource="{&quot;id&quot;:6097096,&quot;type&quot;:&quot;page&quot;,&quot;field&quot;:&quot;title&quot;}" style="display: inline-block;">О магазине</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor">
+                    <div class="insales-editable-content insales-inline-editor mce-content-body mce-edit-focus" style="position: relative;" id="mce_2" contenteditable="true" spellcheck="false">
+                        <p><em><strong>Интернет-магазин "Vspyshka.ru" – лучшие товары по низким ценам!</strong></em></p>
+                        <p><em>Мы рады предложить вам недорогие, но качественные товары с подробными описаниями, характеристиками и фотографиями. У нас Вы можете купить замечательные товары: фотоаппараты, световые приборы и объективы в вашем регионе по ценам производителей и без наценки.</em></p>
+                        <p><em>Продажа большого ассортимента разнообразных товаров – основная специализация нашего интернет-магазина. Мы доставим ваш заказ в любой уголок мира, осуществим подробную консультацию по товарам и поможем с выбором.</em></p>
+                        <p><em>Магазин "Vspyshka.ru" предлагает Вам купить качественную и доступную технику. Все виды современных товаров от эконом класса до более дорогих представлены в нашем каталоге.</em></p>
+                        <p><em><strong>Наши главные преимущества:</strong></em></p>
+                        <ul>
+                            <li><em>Низкие цены от производителей</em></li>
+                            <li><em>Доставка заказов почтой по всей стране за 3-14 дней</em></li>
+                            <li><em>Только оригинальная и сертифицированная продукция</em></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> <!--преимущества-->
+        </div>
+    </div>
+</body>
+
+
+@code {
+    string email;
+    string name;
+    string pic;
+    double price;
+    public IList<Good> good;
+    public List<Good> sortedgood = new List<Good>();
+    public static int idTovar;
+    private void namesend(int id)
+    {
+        idTovar = id;
+        NavigationManager.NavigateTo("/Good");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        good = Service.GetGoods();
+        foreach (var i in good)
+        {
+            if (i.Name == "sony a6600" || i.Name == "canon 24-70mm L" || i.Name == "fujifilm xt3" || i.Name == "godox ad1200" && i.Quantity >= 1)
+            {
+                sortedgood.Add(i);
+            }
+        }
+        email = await oLocalStore.GetItemAsync<string>("MySessionValue");
+    }
+}

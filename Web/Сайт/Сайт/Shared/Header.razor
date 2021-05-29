@@ -1,0 +1,183 @@
+﻿@page "/Header"
+@inject Blazored.LocalStorage.ILocalStorageService oLocalStore
+@inject NavigationManager NavigationManager
+<header>
+    <div class="top-panel">
+        <div class="container">
+            <div class="top-panel-inner row flex-between flex-middle">
+                <div class="top-menu-wrapper cell- hide-sm">
+                    <ul class="top-menu menu">
+                        <li class="top-menu-item menu-item level-1 ">
+                            <a href="/Catalog" class="top-menu-link menu-link level-1">
+                                Каталог
+                            </a>
+                        </li>
+
+                        <li class="top-menu-item menu-item level-1 ">
+                            <a href="/Contacts" class="top-menu-link menu-link level-1">
+                                Контакты
+                            </a>
+                        </li>
+
+                        <li style="text-decoration:none; color: white;" class="top-menu-item menu-item level-1 ">
+                            <a href="/Delivery" class="top-menu-link menu-link level-1">
+                                Доставка
+                            </a>
+                        </li>
+
+                            <li class="top-menu-item menu-item level-1 ">
+                                <a href="/Payment" class="top-menu-link menu-link level-1">
+                                    Оплата
+                                </a>
+                            </li>
+                         
+
+                        @if (Email == null)
+                        {
+                            <li class="top-menu-item menu-item level-1 ">
+                                <a href="/Auth" class="top-menu-link menu-link level-1">
+                                    Личный кабинет
+                                </a>
+                            </li>
+                            //Иначе в авторизацию
+                        }
+
+
+                        else
+                        {
+                            <li class="top-menu-item menu-item level-1 ">
+                                <a href="/Lk" class="top-menu-link menu-link level-1">
+                                    Личный кабинет
+                                </a>
+                            </li>
+                            //если пользователь вошел, то переход в ЛК
+                        }
+
+                    </ul>
+                </div>
+
+                <div class="shopcart-widget cell- text-right">
+                    <a href="/cart" title="Корзина" class="shopcart-link">
+
+                        <span class="shopcart-icon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </span>
+
+                        <span class="hide-sm">
+                            Корзина:
+                            <span class="shopcart-widget-amount js-shopcart-widget-amount">@summ&nbsp;руб</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> <!--Верхнее меню-->
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+            <header class="header">
+                <div class="row flex-between flex-middle">
+
+                    <div class="logotype header-block cell-6 cell-12-sm _flex-first-sm flex-center-md">
+
+
+
+                        <a title="Интернет-магазин Вспышка" href="/" class="logotype-link">
+                            <span class="logotype-text">Интернет-магазин Вспышка</span>
+                        </a>
+
+
+                    </div>
+
+                    <div class="cell-311 cell-12-sm">
+                        <div class="phone header-block flex-center-sm">
+
+                            <a href="tel:+7 953 943-58-69" class="contact-link"><i class="icon fa fa-phone"></i> +7 953 943-58-69</a>
+
+                        </div>
+
+                        <div class="email header-block flex-center-xs hidden-sm">
+
+                            <a href="mailto:flash@gmail.com" class="contact-link"><i class="icon fa fa-envelope"></i> flash@gmail.com</a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="cell-3 header-block flex-end hidden-sm">
+                        <form class="search-widget in-header" action="/search" method="get">
+                            <input type="text" name="q" class="search-widget-field" value="" placeholder="Поиск">
+                            <button type="submit" class="search-widget-button button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </header>  <!--контакты-->
+
+            <div class="main-menu-wrapper hide-sm">
+                <ul class="main-menu menu level-1">
+
+                    <li class="main-menu-item menu-item level-1 ">
+
+                        <a href="/Ph" class="main-menu-link menu-link level-1">Фотоаппараты</a>
+
+                        <button class="main-menu-marker menu-marker menu-marker level-1" type="button"></button>
+
+                        <ul class="main-menu menu level-2">
+
+                            <li class="main-menu-item menu-item level-2 ">
+                                <a href="/Phwithmirror" class="main-menu-link menu-link level-2">Зеркальные</a>
+
+                            </li>
+
+                            <li class="main-menu-item menu-item level-2 ">
+                                <a href="/Phwithoutmirror" class="main-menu-link menu-link level-2">Беззеркальные</a>
+                            </li>
+                        </ul>
+                    </li> <!--Фотоаппараты-->
+
+                    <li class="main-menu-item menu-item level-1 ">
+                        <a href="/Lens" class="main-menu-link menu-link level-1">Объективы</a>
+                    </li>  <!--Объективы-->
+
+                    <li class="main-menu-item menu-item level-1 ">
+                        <a href="Light" class="main-menu-link menu-link level-1">Световые приборы</a>
+                    </li> <!--Свет-->
+                </ul>
+            </div> <!-- разделы-->
+        </div>
+    </div>
+</header> <!--меню на все страницы-->
+
+@code {
+
+    public static string Email;
+    int count = 0;
+    double summ = 0.00; 
+    public static List<Good> addcart = new List<Good>();
+    public static List<int> addcartqu = new List<int>();
+    protected override async Task OnInitializedAsync()
+    {
+        Email = await oLocalStore.GetItemAsync<string>("MySessionValue");
+
+        foreach (var i in Header.addcart)
+        {
+            //i.Picture = PickerVariantsdf;
+            summ += Convert.ToDouble(i.Price) * Header.addcartqu[count];
+            count++;
+
+        }
+        count = 0;
+    }
+
+    public static void changeemail(string email)
+    {
+        Email = email;
+
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        StateHasChanged();
+    }
+}

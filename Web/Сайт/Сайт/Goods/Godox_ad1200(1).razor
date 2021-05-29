@@ -1,0 +1,391 @@
+﻿@page "/Good"
+@using Сайт.Goodsbuttom
+@inject GoodService Service
+@inject NavigationManager NavigationManager
+
+<html>
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+
+            <div class="breadcrumb-wrapper">
+
+                @if (subcat == "импульсный свет" || subcat == "постоянный свет")
+                {
+                    <ul class="breadcrumb1">
+                        <li class="breadcrumb-item home">
+                            <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Световые приборы" href="/Light">Световые приборы</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-link current-page">@good2.Name</span>
+                        </li>
+                    </ul>
+                }
+                else if (subcat == "беззеркалки")
+                {
+                    <ul class="breadcrumb1">
+                        <li class="breadcrumb-item home">
+                            <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Фотоаппараты" href="/Ph">Фотоаппараты</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Бз" href="/Phwithoutmirror">Беззеркальные</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-link current-page">@good2.Name</span>
+                        </li>
+                    </ul>
+                }
+                else if (subcat == "зеркалки")
+                {
+                    <ul class="breadcrumb1">
+                        <li class="breadcrumb-item home">
+                            <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Фотоаппараты" href="/Ph">Фотоаппараты</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Бз" href="/Phwithmirror">Зеркальные</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-link current-page">@good2.Name</span>
+                        </li>
+                    </ul>
+                }
+                else if (subcat == "fullframe" || subcat == "apsc")
+                {
+                <ul class="breadcrumb1">
+                    <li class="breadcrumb-item home">
+                        <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="breadcrumb-link" title="Световые приборы" href="/Lens">Объективы</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-link current-page">@good2.Name</span>
+                    </li>
+                </ul>
+                }
+                else
+                {
+                <ul class="breadcrumb1">
+                    <li class="breadcrumb-item home">
+                        <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="breadcrumb-link" title="Фотоаппараты" href="/Ph">Фотоаппараты</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-link current-page">@good2.Name</span>
+                    </li>
+                </ul>
+                }
+
+            </div> <!--назад-->
+
+            <div class="decorated-title-wrapper">
+                <div class="decorated-title">
+                    <div class="page-header-wrapper">
+                        <h1 class="page-header">
+                            @good2.Name
+                        </h1>
+                    </div>
+                </div>
+            </div> <!--плашка-->
+            <div class="row">
+                <div class="product-gallery-wrapper cell-5 cell-12-sm">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="background-color:black;">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <img src="@good2.Picture" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item active">
+                                <img src="@good2.Picture2" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="@good2.Picture3" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <!--изображения-->
+
+                <div class="product-content-wrapper cell-7 cell-12-sm">
+                    <div class="product-introtext on-page editor">
+                        Представляем вашему вниманию новейшую вспышку от Godox -
+                        godox ad1200! После долгой разработки и тестировния данный товар появился на наших прилавках! Данная
+                        вспышка сочетает все самое лучшее от прошлой модели - godox ad600, но стала мощнее и лучше!
+                    </div>
+
+                    <form class="product-form">
+
+                        <div class="product-sku-wrapper ">
+                            <span>Артикул:</span>
+                            <span>@good2.Idgood</span>
+                        </div>
+
+                        <div class="product-prices on-page">
+                            <div class="price js-product-price on-page">@good2.Price&nbsp;руб</div>
+                            <div class="old-price  on-page">
+                            </div>
+                        </div>
+
+                        <div class="product-control on-page">
+
+                            <div class="counter" data-quantity="" data-quantity-change-init="true" style="">
+                                <button @onclick="down" type="button" class="counter-button button count-down">
+                                    <i class="icon fa fa-minus"></i>
+                                </button>
+
+                                <input type="text" value="@quantity" min="1" max="1000" name="quantity" class="counter-input input-number input-field">
+
+                                <button type="button" @onclick="up" data-quantity-change="1" class="counter-button button count-up">
+                                    <i class="icon fa fa-plus"></i>
+                                </button>
+                            </div> <!-- +- -->
+
+                            <div class="buy">
+                                <div class="product-order-variant variant-shown">
+                                    <button class="product-button button is-primary" type="button" >
+                                        <i class="icon buy-icon fa fa-shopping-cart"></i>
+                                        <span class="button-text" @onclick="tocart">В корзину</span>
+                                    </button>
+                                </div>
+                            </div> <!-- В корзину -->
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="cell-12">
+                    <div class="product-content">
+
+                        <div class="tabs-menu-wrapper">
+                            <ul class="tabs-menu product-tabs-list">
+
+                                <button class="tabs-menu-item tabs-menu-link is-active tablinks" onclick="openMenu(event, 'About')" id="defaultOpen">Описание</button>
+                                <button class="tabs-menu-item tabs-menu-link tablinks" onclick="openMenu(event, 'Har')" id="defaultOpen">Характеристики</button>
+
+                            </ul>
+                        </div><!-- хар-ка меню -->
+
+
+                        <div class="tabs-list product-tabs-list">
+
+                            <div class="tab-block tabcontent is-active" id="About">
+                                <div class="editor">
+                                    <p><span>Godox ad1200</span></p>
+                                    <p><span><br>Как следует из названия прибора, он имеет мощность 1200 Вт и представляет собой комплект из отдельного блока питания (повер-пак) и головки вспышки, которая соединяется кабелем с блоком. Вспышка способна работать не только в студии, в повер-пак установлен сменный литий-ионный аккумулятор (36V/2600 мАч), так что комплект можно использовать вдали от розетки, а для длительных съёмок можно дополнительно приобрести батарею повышенной емкости (36V/5200 мАч).</span></p>
+                                    <p>Несмотря на новый форм-фактор, AD1200 Pro обладает всеми характеристиками системы освещения AD, например, она совместима с беспроводной X-системой трансмиттеров TTL 2,4 ГГц. Прибор поддерживает до пяти групп и 32-х каналов с работой через дополнительные TTL-приёмопередатчики и совместим с камерами Canon, Nikon, Sony, Fujifilm, Olympus и Panasonic.&nbsp;</p>
+                                </div>
+                            </div><!-- о товаре -->
+
+                            <div id="Har" class="tab-block tabcontent is-closed">
+                                <div class="editor">
+                                    <table class=" table-bordered table-striped table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <td>Длина</td>
+                                                <td>
+                                                    @good2.Length, сантиметров
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ширина</td>
+                                                <td>
+                                                    @good2.Width, сантиметров
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Высота</td>
+                                                <td>
+                                                    @good2.Height, сантиметров
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Вес</td>
+                                                <td>
+                                                    @good2.Weight, грамм
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Гарантия</td>
+                                                <td>
+                                                    @good2.Guarantee, месяцев
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- хар-ка -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- товар -->
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@code
+{
+    public IList<Good> good;
+    public static List<Good> addcart = new List<Good>();
+    public static List<Good> addcartqu = new List<Good>();
+    int quantity = 1;
+    int qu = 1;
+    Good good2;
+    string pic, pic1, pic2, name, subcat, cat;
+    int arc, guarantee;
+    double price, weight, height, lenght, width;
+    protected override void OnInitialized()
+    {
+        good = Service.GetGoods();
+        foreach (var i in good)
+        {
+            if (i.Idgood == Catalog.idTovar)
+            {
+                good2 = i;
+                Catalog.idTovar = -1;
+                break;
+            }
+
+            if (i.Idgood == Light.idTovar)
+            {
+                good2 = i;
+                Light.idTovar = -1;
+                break;
+            }
+
+            if (i.Idgood == Lens.idTovar)
+            {
+                good2 = i;
+                Lens.idTovar = -1;
+                break;
+            }
+
+
+            if (i.Idgood == Ph.idTovar)
+            {
+                good2 = i;
+                Ph.idTovar = -1;
+                break;
+            }
+
+            if (i.Idgood == Phwithmirror.idTovar)
+            {
+                good2 = i;
+                Phwithmirror.idTovar = -1;
+                break;
+            }
+
+            if (i.Idgood == Phwithoutmirror.idTovar)
+            {
+                good2 = i;
+                Phwithoutmirror.idTovar = -1;
+                break;
+            }
+
+            if (i.Idgood == Pages.Main.idTovar)
+            {
+                good2 = i;
+                //cat = i.Category;
+                //subcat = i.Subcategory;
+                //name = i.Name;
+                //pic = i.Picture;
+                //pic1 = i.Picture2;
+                //pic2 = i.Picture3;
+                //price = Convert.ToDouble(i.Price);
+                //arc = i.Idgood;
+                //weight = Convert.ToDouble(i.Weight);
+                //height = Convert.ToDouble(i.Height);
+                //lenght = Convert.ToDouble(i.Length);
+                //width = Convert.ToDouble(i.Width);
+                //guarantee = Convert.ToInt32(i.Guarantee);
+                Pages.Main.idTovar = -1;
+                break;
+            }
+        }
+    }
+
+
+    void down()
+    {
+        if (quantity == 1)
+        {
+
+        }
+        else
+        {
+            quantity--;
+            qu = quantity;
+        }
+    }
+
+    void up()
+    {
+        good = Service.GetGoods();
+        foreach (var i in good)
+        {
+            if (i.Name == good2.Name)
+            {
+                if (quantity < good2.Quantity)
+                {
+                    quantity++;
+                    qu = quantity;
+                }
+                else
+                {
+                }
+            }
+        }
+    }
+
+    void tocart(/*string name2, int qu2*/)
+    {
+        Header.addcart.Add(good2);
+        Header.addcartqu.Add(qu);
+        //nameto = name2;
+        //qu = qu2;
+        /*NavigationManager.NavigateTo("/Cart")*/
+
+    }
+}

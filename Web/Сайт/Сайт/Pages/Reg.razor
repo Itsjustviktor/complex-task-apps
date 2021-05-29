@@ -1,0 +1,146 @@
+﻿@page "/Reg"
+@inject NavigationManager NavigationManager
+@inject UserService Service
+
+<html>
+<body>
+    <div class="page-wrapper fhg-content">
+        <div class="container page-inner ">
+            <div class="page-content checkout-v1-wrapper ">
+
+                <div class="page-content checkout-v1-wrapper ">
+
+                    <div class="wrapper body fc">
+
+
+                        <div class="decorated-title-wrapper">
+                            <div class="decorated-title">
+                                <div class="page-header-wrapper">
+                                    <h1 class="page-header">Регистрация</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="flash_messages"></div>
+
+                        <div id="top_info"></div>
+
+                        <div class="set wide_set">
+                            <form class="new_client" accept-charset="UTF-8">
+                                <input name="utf8" type="hidden" value="✓">
+
+                                <div class="set-block">
+                                    <form>
+                                        <div class="field fc">
+                                            <a name="top"></a>
+                                            <div class="field-label">
+                                                <label for="client_name">Фамилия:</label>
+                                                <span class="warning">*</span>
+                                            </div>
+                                            <div class="field-content">
+                                                <input class="textfield" required="" @bind-value="sname" @bind-value:event="oninput">
+                                                <div class="small"></div>
+                                            </div>
+
+                                            <div class="field-label">
+                                                <label for="client_name">Имя:</label>
+                                                <span class="warning">*</span>
+                                            </div>
+                                            <div class="field-content">
+                                                <input class="textfield" required="" @bind-value="fname" @bind-value:event="oninput">
+                                                <div class="small"></div>
+                                            </div>
+
+                                            <div class="field-label">
+                                                <label for="client_name">Отчество:</label>
+                                                <span class="warning">*</span>
+                                            </div>
+                                            <div class="field-content">
+                                                <input class="textfield" required=""  @bind-value="tname" @bind-value:event="oninput">
+                                                <div class="small"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field fc">
+                                            <div class="field-label">
+                                                <label for="client_phone">Контактный телефон:</label><span class="warning">*</span>
+                                            </div>
+                                            <div class="field-content">
+                                                <input class="textfield" required="" @bind-value="phone" @bind-value:event="oninput">
+                                                <div class="small">Например: +7(926)111-11-11</div>
+                                            </div>
+                                        </div>
+                                        <div class="field fc co-input--required input--required">
+                                            <div class="field-label">
+                                                <label for="client_email">Email:</label><span class="warning">*</span>
+                                            </div>
+                                            <div class="field-content">
+                                                <input class="textfield" required="" @bind-value="email" @bind-value:event="oninput">
+                                                <div class="small"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field fc">
+                                            <div class="field-label">Пароль:<span class="warning">*</span></div>
+                                            <div class="field-content">
+                                            <input class="textfield" @bind-value="pass" @bind-value:event="oninput" required=""></div>
+                                        </div>
+                                        <div class="field fc">
+                                            <div class="field-label">Повторите пароль:<span class="warning">*</span></div>
+                                            <div class="field-content">
+                                                <input class="textfield" required="" @bind-value="pass2" @bind-value:event="oninput">
+                                            </div>
+                                        </div>
+
+                                        <div class="field fc">
+                                            <div class="field-label"></div>
+                                            <div class="field-content">
+                                                @if (pass == pass2 && pass != null && pass2 != null && email != null && phone != null && fname != null && sname != null && tname != null)
+                                                {
+                                                    
+                                                    <input name="commit" value="Зарегистрироваться" class="button" @onclick="Buyer_add">
+                                                }
+                                                else
+                                                {
+                                            <button type="button" >
+                                                <input value="Зарегистрироваться" class="button">
+                                            </button>
+                                                }
+                                            </div>
+                                        </div>
+                                        </form>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@code {
+
+    string fname, sname, tname, email, pass, pass2, phone;
+    public Buyer buyer = new Buyer();
+    private void Buyer_add()
+    {
+        if (pass == pass2)
+        {
+            buyer.First = fname;
+            buyer.Second = sname;
+            buyer.Third = tname;
+            buyer.Emailbuyer = email;
+            buyer.Password = pass;
+            buyer.Telephonebuyer = phone;
+            Service.InsertUser(buyer);
+            try1();
+        }
+
+    }
+    void try1()
+    {
+        NavigationManager.NavigateTo("/Lk");
+    }
+}
