@@ -1,0 +1,72 @@
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\ExampleAdoNet.exe.config
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\ExampleAdoNet.exe
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\ExampleAdoNet.pdb
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\Npgsql.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Buffers.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Memory.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Numerics.Vectors.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Text.Encodings.Web.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Text.Json.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Threading.Channels.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.ValueTuple.dll
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\Npgsql.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Buffers.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Memory.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Numerics.Vectors.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Text.Encodings.Web.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Text.Json.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Threading.Channels.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\visual studio\БД\ExampleAdoNet\bin\Debug\System.ValueTuple.xml
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.csprojAssemblyReference.cache
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.Form1.resources
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.Properties.Resources.resources
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.csproj.GenerateResource.cache
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.csproj.CoreCompileInputs.cache
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.csproj.CopyComplete
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.exe
+D:\visual studio\БД\ExampleAdoNet\obj\Debug\ExampleAdoNet.pdb
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\ExampleAdoNet.exe.config
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\ExampleAdoNet.exe
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\ExampleAdoNet.pdb
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\Npgsql.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Buffers.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Memory.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Text.Json.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Threading.Channels.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.ValueTuple.dll
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\Npgsql.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Buffers.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Memory.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Text.Json.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Threading.Channels.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\bin\Debug\System.ValueTuple.xml
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.csprojAssemblyReference.cache
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Form1.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Properties.Resources.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.csproj.GenerateResource.cache
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.csproj.CoreCompileInputs.cache
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.csproj.CopyComplete
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.exe
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.pdb
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Backcall.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.lr3.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Manager.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Orders.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Add.resources
+C:\Users\0\Desktop\Web\Подключение к бд\ADO net 1\obj\Debug\ExampleAdoNet.Skladcs.resources
