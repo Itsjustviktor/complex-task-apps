@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+
 #nullable disable
 
 namespace Сайт
@@ -17,7 +18,6 @@ namespace Сайт
         }
 
         public virtual DbSet<Buyer> Buyers { get; set; }
-        public virtual DbSet<Delivery> Deliveries { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Good> Goods { get; set; }
@@ -52,7 +52,7 @@ namespace Сайт
                 entity.Property(e => e.Idbuyer)
                     .HasColumnName("idbuyer")
                     .UseIdentityAlwaysColumn()
-                    .HasIdentityOptions(6L, null, null, null, null, null);
+                    .HasIdentityOptions(5L, null, null, null, null, null);
 
                 entity.Property(e => e.Emailbuyer).HasColumnName("emailbuyer");
 
@@ -69,36 +69,6 @@ namespace Сайт
                 entity.Property(e => e.Third).HasColumnName("third");
             });
 
-            modelBuilder.Entity<Delivery>(entity =>
-            {
-                entity.HasKey(e => e.Iddelivery)
-                    .HasName("delivery_pkey");
-
-                entity.ToTable("delivery");
-
-                entity.Property(e => e.Iddelivery)
-                    .HasColumnName("iddelivery")
-                    .UseIdentityAlwaysColumn();
-
-                entity.Property(e => e.Addressdelivery).HasColumnName("addressdelivery");
-
-                entity.Property(e => e.Cost).HasColumnName("cost");
-
-                entity.Property(e => e.Dateofbegin)
-                    .HasColumnType("time without time zone")
-                    .HasColumnName("dateofbegin");
-
-                entity.Property(e => e.Dateofend)
-                    .HasColumnType("time without time zone")
-                    .HasColumnName("dateofend");
-
-                entity.Property(e => e.Idorder).HasColumnName("idorder");
-
-                entity.Property(e => e.Tracknum).HasColumnName("tracknum");
-
-                entity.Property(e => e.Typedelivery).HasColumnName("typedelivery");
-            });
-
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasKey(e => e.Idemployee)
@@ -111,6 +81,8 @@ namespace Сайт
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Firstname).HasColumnName("firstname");
+
+                entity.Property(e => e.Password).HasColumnName("password");
 
                 entity.Property(e => e.Post).HasColumnName("post");
 
@@ -168,6 +140,12 @@ namespace Сайт
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
+                entity.Property(e => e.P1).HasColumnName("p1");
+
+                entity.Property(e => e.P2).HasColumnName("p2");
+
+                entity.Property(e => e.P3).HasColumnName("p3");
+
                 entity.Property(e => e.Picture).HasColumnName("picture");
 
                 entity.Property(e => e.Picture2).HasColumnName("picture2");
@@ -198,17 +176,14 @@ namespace Сайт
 
                 entity.Property(e => e.Idorder)
                     .HasColumnName("idorder")
-                    .UseIdentityAlwaysColumn();
+                    .UseIdentityAlwaysColumn()
+                    .HasIdentityOptions(1111L, null, null, null, null, null);
 
-                entity.Property(e => e.Dateorder)
-                    .HasColumnType("date")
-                    .HasColumnName("dateorder");
+                entity.Property(e => e.Adress).HasColumnName("adress");
+
+                entity.Property(e => e.Date).HasColumnName("date");
 
                 entity.Property(e => e.Idbuyer).HasColumnName("idbuyer");
-
-                entity.Property(e => e.Iddelivery).HasColumnName("iddelivery");
-
-                entity.Property(e => e.Idemployee).HasColumnName("idemployee");
 
                 entity.Property(e => e.Paymentmethod).HasColumnName("paymentmethod");
 
@@ -217,6 +192,8 @@ namespace Сайт
                 entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.Property(e => e.Takemethod).HasColumnName("takemethod");
+
+                entity.Property(e => e.Tracknum).HasColumnName("tracknum");
             });
 
             modelBuilder.Entity<Orderedgood>(entity =>
@@ -229,7 +206,7 @@ namespace Сайт
                 entity.Property(e => e.Idorderedgoods)
                     .HasColumnName("idorderedgoods")
                     .UseIdentityAlwaysColumn()
-                    .HasIdentityOptions(null, null, 2L, null, null, null);
+                    .HasIdentityOptions(null, null, 3L, null, null, null);
 
                 entity.Property(e => e.Idgood).HasColumnName("idgood");
 

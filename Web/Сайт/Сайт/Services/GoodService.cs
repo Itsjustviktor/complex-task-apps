@@ -19,5 +19,23 @@ namespace Сайт.Services
                 return dB.Goods.ToList();
             }
         } //возвращает лист гудс
+
+        public bool UpdateGood(Good good, int count)
+        {
+            using (dB = new inetmagazContext())
+            {
+                var updategood = dB.Goods.FirstOrDefault(u => u.Idgood == good.Idgood);
+                if(updategood.Quantity-count<0)
+                {
+                    throw new Exception("На складе недостаточно товара");
+                }
+                else
+                {
+                    updategood.Quantity = updategood.Quantity - count;
+                    dB.SaveChanges();
+                    return true;
+                }
+            }
+        } //возвращает лист гудс
     }
 }

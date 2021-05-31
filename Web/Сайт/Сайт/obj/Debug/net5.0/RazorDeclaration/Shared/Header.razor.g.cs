@@ -105,32 +105,35 @@ using Сайт.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 152 "C:\Users\0\source\repos\Сайт\Сайт\Shared\Header.razor"
+#line 162 "C:\Users\0\source\repos\Сайт\Сайт\Shared\Header.razor"
        
-
+    public static double summ = 0;
     public static string Email;
-    int count = 0;
-    double summ = 0.00; 
+    public static string namefind;
+    string nameHead;
     public static List<Good> addcart = new List<Good>();
     public static List<int> addcartqu = new List<int>();
     protected override async Task OnInitializedAsync()
     {
         Email = await oLocalStore.GetItemAsync<string>("MySessionValue");
-
-        foreach (var i in Header.addcart)
-        {
-            //i.Picture = PickerVariantsdf;
-            summ += Convert.ToDouble(i.Price) * Header.addcartqu[count];
-            count++;
-
-        }
-        count = 0;
     }
+
+    private void namesend(string nameHead)
+    {
+        namefind = nameHead;
+        NavigationManager.NavigateTo("/Catalog");
+    }
+
 
     public static void changeemail(string email)
     {
         Email = email;
+    }
 
+
+    public static void changesumm(double sum)
+    {
+        summ = sum;
     }
 
     protected override void OnAfterRender(bool firstRender)

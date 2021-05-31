@@ -106,27 +106,27 @@
 
                         @foreach (var i in sortedgood)
                         {
-                        <div class="product-card-wrapper cell-4 cell-6-md cell-12-mc">
-                            <a class="product-card product-link" @onclick="(()=>namesend(i.Idgood))">
-                                <div class="card-inner ">
-                                    <div class="product-photo">
-                                        <div class="product-link image-container is-square ">
-                                            <img src="@i.Picture" alt="" title="" class="product-image">
+                            <div class="product-card-wrapper cell-4 cell-6-md cell-12-mc">
+                                <a class="product-card product-link" @onclick="(()=>namesend(i.Idgood))">
+                                    <div class="card-inner ">
+                                        <div class="product-photo">
+                                            <div class="product-link image-container is-square ">
+                                                <img src="@i.Picture" alt="" title="" class="product-image">
+                                            </div>
+                                            <div class="product-prices in-card">
+                                                <div class="price in-card">
+                                                    @i.Price&nbsp;руб
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="product-prices in-card">
-                                            <div class="price in-card">
-                                                @i.Price&nbsp;руб
+                                        <div class="product-caption product-link">
+                                            <div class="product-title in-card">
+                                                @i.Name
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-caption product-link">
-                                        <div class="product-title in-card">
-                                            @i.Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         }
                     </div>
                     <!--Продукты-->
@@ -153,18 +153,31 @@
     }
     protected override void OnInitialized()
     {
-        good = Service.GetGoods();
-        foreach (var i in good)
+        if (Header.namefind == null)
         {
-            if (i.Category == "фотокамеры" || i.Category == "объектив" || i.Category == "свет" && i.Quantity >= 1)
+            good = Service.GetGoods();
+            foreach (var i in good)
             {
-                sortedgood.Add(i);
+                if (i.Category == "фотокамеры" || i.Category == "объектив" || i.Category == "свет" && i.Quantity >= 1)
+                {
+                    sortedgood.Add(i);
+                }
+            }
+        }
+        else
+        {
+            good = Service.GetGoods();
+            foreach (var i in good)
+            {
+                if (i.Firm == Header.namefind || i.Subfirm == Header.namefind || i.Name == Header.namefind && i.Quantity >= 1)
+                {
+                    sortedgood.Add(i);
+                }
             }
         }
     }
     private void sort(ChangeEventArgs eventArgs)
     {
-        Console.WriteLine(eventArgs.Value.ToString());
         if (eventArgs.Value.ToString() == "price")
         {
             sortedgood = sortedgood.OrderBy(C => C.Price).ToList();

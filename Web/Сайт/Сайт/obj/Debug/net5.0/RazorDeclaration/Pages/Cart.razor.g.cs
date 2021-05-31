@@ -105,12 +105,17 @@ using Сайт.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 178 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Cart.razor"
+#line 207 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Cart.razor"
        
+    string adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
     string email;
     string name, name2, name3, phone;
     int count = 0;
+    int idbuyer;
+    int change = 1;
     double summ = 0;
+    double dost = 0;
+    double all;
     public IList<Buyer> buyer;
     protected override async Task OnInitializedAsync()
     {
@@ -124,17 +129,24 @@ using Сайт.Services;
                 name2 = i.Second;
                 name3 = i.Third;
                 phone = i.Telephonebuyer;
+                idbuyer = i.Idbuyer;
             }
         }
-
-        foreach(var i in Header.addcart)
+        count = 0;
+        foreach (var i in Header.addcart)
         {
-            //i.Picture = PickerVariantsdf;
             summ += Convert.ToDouble(i.Price) * Header.addcartqu[count];
             count++;
-
         }
+        all = summ;
         count = 0;
+        sendsum();
+    }
+
+    void sendsum()
+    {
+        Header.changesumm(summ);
+        Header.summ = summ;
     }
     public async void ClearSession()
     {
@@ -155,10 +167,105 @@ using Сайт.Services;
         NavigationManager.NavigateTo("/Catalog");
     }
 
+    public void clear()
+    {
+        Header.addcart.Clear();
+        Header.addcartqu.Clear();
+        summ = 0;
+        sendsum();
+    }
+
+    public void office()
+    {
+        if (dost == 200)
+        {
+            all = all - dost;
+            dost = 0;
+            change = 1;
+            adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
+            sendsum();
+        }
+        else
+        {
+            all = summ;
+            change = 1;
+            adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
+            sendsum();
+        }
+    }
+
+    public void dostavka()
+    {
+        dost = 200;
+        all = summ + dost;
+        change = 2;
+        adress = "Россия, г.Киров 610000";
+        sendsum();
+    }
+
+    public Order order = new Order();
+
+    public void add()
+    {
+        if (change == 1)
+        {
+            order.Status = "Ждет получателя в офисе";
+            order.Priceoreder = summ;
+            order.Paymentmethod = "Не оплачено";
+            order.Takemethod = "Из офиса";
+            order.Idbuyer = idbuyer;
+            order.Tracknum = "-";
+            order.Adress = adress;
+            order.Date = DateTime.Now;
+            Service1.InsertOrder(order);
+        }
+        if (change == 2)
+        {
+            order.Status = "Сбор заказа";
+            order.Priceoreder = summ + dost;
+            order.Paymentmethod = "Не оплачено";
+            order.Takemethod = "Почта России";
+            order.Idbuyer = idbuyer;
+            order.Tracknum = "-";
+            order.Adress = adress;
+            order.Date = DateTime.Now;
+            Service1.InsertOrder(order);
+        }
+
+        int k = 0;
+        foreach (var i in Header.addcart)
+        {
+            Orderedgood orderedgood = new Orderedgood();
+            Service2.UpdateGood(i, Header.addcartqu[k]);
+            orderedgood.Idgood = i.Idgood;
+            orderedgood.Quantityorderedgoods = Header.addcartqu[k];
+            orderedgood.Price = i.Price;
+            orderedgood.Idorder = order.Idorder;
+            Service1.InsertOrderedGood(orderedgood);
+            k++;
+        }
+
+        clear();
+        NavigationManager.NavigateTo("/");
+    }
+
+    //private void delete(string a)
+    //{
+    //    count = 0;
+    //    var index = Header.addcart.FindIndex(i => i.Name == a);
+    //    Header.addcart.RemoveAt(index);
+
+    //    var index2 = Header.addcartqu.FindIndex(i => i == b);
+    //    Header.addcartqu.RemoveAt(index2);
+
+    //}
+
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private GoodService Service2 { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private OrderService Service1 { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private UserService Service { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.LocalStorage.ILocalStorageService oLocalStore { get; set; }
     }

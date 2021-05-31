@@ -66,7 +66,7 @@
                                                 <label for="client_phone">Контактный телефон:</label><span class="warning">*</span>
                                             </div>
                                             <div class="field-content">
-                                                <input class="textfield" required="" @bind-value="phone" @bind-value:event="oninput">
+                                                <input class="textfield" onkeypress='validate(event)' type="text" required="" @bind-value="phone" @bind-value:event="oninput">
                                                 <div class="small">Например: +7(926)111-11-11</div>
                                             </div>
                                         </div>
@@ -83,12 +83,12 @@
                                         <div class="field fc">
                                             <div class="field-label">Пароль:<span class="warning">*</span></div>
                                             <div class="field-content">
-                                            <input class="textfield" @bind-value="pass" @bind-value:event="oninput" required=""></div>
+                                            <input type="password" class="textfield" @bind-value="pass" @bind-value:event="oninput" required=""></div>
                                         </div>
                                         <div class="field fc">
                                             <div class="field-label">Повторите пароль:<span class="warning">*</span></div>
                                             <div class="field-content">
-                                                <input class="textfield" required="" @bind-value="pass2" @bind-value:event="oninput">
+                                                <input type="password" class="textfield" required="" @bind-value="pass2" @bind-value:event="oninput">
                                             </div>
                                         </div>
 
@@ -102,8 +102,8 @@
                                                 }
                                                 else
                                                 {
-                                            <button type="button" >
-                                                <input value="Зарегистрироваться" class="button">
+                                            <button type="button" class="unselectable">
+                                                <input disabled value="Зарегистрироваться" class="button unselectable">
                                             </button>
                                                 }
                                             </div>

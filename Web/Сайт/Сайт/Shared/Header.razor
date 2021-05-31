@@ -25,12 +25,12 @@
                             </a>
                         </li>
 
-                            <li class="top-menu-item menu-item level-1 ">
-                                <a href="/Payment" class="top-menu-link menu-link level-1">
-                                    Оплата
-                                </a>
-                            </li>
-                         
+                        <li class="top-menu-item menu-item level-1 ">
+                            <a href="/Payment" class="top-menu-link menu-link level-1">
+                                Оплата
+                            </a>
+                        </li>
+
 
                         @if (Email == null)
                         {
@@ -63,10 +63,20 @@
                             <i class="fa fa-shopping-cart"></i>
                         </span>
 
+                        @if (summ == 0)
+                        {
+                            <span class="hide-sm">
+                                Корзина
+                                <span class="shopcart-widget-amount js-shopcart-widget-amount"></span>
+                            </span>
+                        }
+                        else
+                        {
                         <span class="hide-sm">
                             Корзина:
-                            <span class="shopcart-widget-amount js-shopcart-widget-amount">@summ&nbsp;руб</span>
+                            <span class="shopcart-widget-amount js-shopcart-widget-amount">@summ &nbsp;руб</span>
                         </span>
+                        }
                     </a>
                 </div>
             </div>
@@ -104,12 +114,12 @@
 
 
                     <div class="cell-3 header-block flex-end hidden-sm">
-                        <form class="search-widget in-header" action="/search" method="get">
-                            <input type="text" name="q" class="search-widget-field" value="" placeholder="Поиск">
-                            <button type="submit" class="search-widget-button button">
+                        <a class="search-widget in-header">
+                            <input class="search-widget-field" @bind-value="@nameHead" @bind-value:event="oninput" placeholder="Поиск">
+                            <button class="search-widget-button button" @onclick="(() => namesend(nameHead))">
                                 <i class="fa fa-search"></i>
                             </button>
-                        </form>
+                        </a>
                     </div>
                 </div>
             </header>  <!--контакты-->
@@ -150,30 +160,33 @@
 </header> <!--меню на все страницы-->
 
 @code {
-
+    public static double summ = 0;
     public static string Email;
-    int count = 0;
-    double summ = 0.00; 
+    public static string namefind;
+    string nameHead;
     public static List<Good> addcart = new List<Good>();
     public static List<int> addcartqu = new List<int>();
     protected override async Task OnInitializedAsync()
     {
         Email = await oLocalStore.GetItemAsync<string>("MySessionValue");
-
-        foreach (var i in Header.addcart)
-        {
-            //i.Picture = PickerVariantsdf;
-            summ += Convert.ToDouble(i.Price) * Header.addcartqu[count];
-            count++;
-
-        }
-        count = 0;
     }
+
+    private void namesend(string nameHead)
+    {
+        namefind = nameHead;
+        NavigationManager.NavigateTo("/Catalog");
+    }
+
 
     public static void changeemail(string email)
     {
         Email = email;
+    }
 
+
+    public static void changesumm(double sum)
+    {
+        summ = sum;
     }
 
     protected override void OnAfterRender(bool firstRender)

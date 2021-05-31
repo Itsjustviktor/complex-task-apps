@@ -105,10 +105,10 @@ using Сайт.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 375 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Main.razor"
+#line 376 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Main.razor"
        
     string email;
-    string name;
+    string name, fname, telnum;
     string pic;
     double price;
     public IList<Good> good;
@@ -132,10 +132,22 @@ using Сайт.Services;
         email = await oLocalStore.GetItemAsync<string>("MySessionValue");
     }
 
+    public Feedback feedback = new Feedback();
+    private void add()
+    {
+        if (fname == "" && telnum == "")
+        {
+            feedback.Firstname = fname;
+            feedback.Telnumber = telnum;
+            Service1.InsertFeedback(feedback);
+        }
+    }
+
 #line default
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private Blazored.LocalStorage.ILocalStorageService oLocalStore { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private FeedbackService Service1 { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private GoodService Service { get; set; }
     }

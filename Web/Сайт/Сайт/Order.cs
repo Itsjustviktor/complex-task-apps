@@ -13,8 +13,8 @@ namespace Сайт
         public string Paymentmethod { get; set; }
         public string Takemethod { get; set; }
         public int? Idbuyer { get; set; }
-        public int? Idemployee { get; set; }
-        public int? Iddelivery { get; set; }
-        public DateTime? Dateorder { get; set; }
+        public string Tracknum { get; set; }
+        public string Adress { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

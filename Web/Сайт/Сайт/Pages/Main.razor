@@ -2,6 +2,7 @@
 @page "/"
 @inject GoodService Service
 @inject NavigationManager NavigationManager
+@inject FeedbackService Service1
 @inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 <!DOCTYPE html>
 <head>
@@ -319,23 +320,23 @@
                     <div class="feedback-heading">
                         Форма обратной связи
                     </div>
-                    <form class="feedback-form form" method="post" data-max-send="5">
+                    <a class="feedback-form form" method="post" data-max-send="5">
                         <div class="form-row form-ui">
                             <p class="form-title">Имя</p>
-                            <input type="text" name="name" value="" class="widget-form-field" required="">
+                            <input type="text" @bind-value="fname" @bind-value:event="oninput" name="name" class="widget-form-field" required="">
                         </div>
 
                         <div class="form-row form-ui">
                             <p class="form-title">Телефон</p>
-                            <input type="text" name="phone" value="" class="widget-form-field" required="">
+                            <input type="text" onkeypress='validate(event)' name="phone" @bind-value="telnum" @bind-value:event="oninput" class="widget-form-field" required="">
                         </div>
 
                         <div class="form-row form-ui">
-                            <button type="submit" name="button" class="button button-primary button-widget-feedback">
+                            <button type="submit" name="button" class="button button-primary button-widget-feedback" @onclick ="add">
                                 <span class="button-text">Отправить</span>
                             </button>
                         </div>
-                    </form>
+                    </a>
                 </div>
             </div> <!--обратная связь-->
 
@@ -374,7 +375,7 @@
 
 @code {
     string email;
-    string name;
+    string name, fname, telnum;
     string pic;
     double price;
     public IList<Good> good;
@@ -396,5 +397,16 @@
             }
         }
         email = await oLocalStore.GetItemAsync<string>("MySessionValue");
+    }
+
+    public Feedback feedback = new Feedback();
+    private void add()
+    {
+        if (fname == "" && telnum == "")
+        {
+            feedback.Firstname = fname;
+            feedback.Telnumber = telnum;
+            Service1.InsertFeedback(feedback);
+        }
     }
 }

@@ -26,5 +26,8 @@ namespace Сайт
         public string Picture { get; set; }
         public string Picture2 { get; set; }
         public string Picture3 { get; set; }
+        public string P1 { get; set; }
+        public string P2 { get; set; }
+        public string P3 { get; set; }
     }
 }

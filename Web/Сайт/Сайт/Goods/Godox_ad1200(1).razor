@@ -10,7 +10,7 @@
 
             <div class="breadcrumb-wrapper">
 
-                @if (subcat == "импульсный свет" || subcat == "постоянный свет")
+                @if (good2.Subcategory == "импульсный свет" || good2.Subcategory == "постоянный свет")
                 {
                     <ul class="breadcrumb1">
                         <li class="breadcrumb-item home">
@@ -27,7 +27,7 @@
                         </li>
                     </ul>
                 }
-                else if (subcat == "беззеркалки")
+                else if (good2.Subcategory == "беззеркалки")
                 {
                     <ul class="breadcrumb1">
                         <li class="breadcrumb-item home">
@@ -47,7 +47,7 @@
                         </li>
                     </ul>
                 }
-                else if (subcat == "зеркалки")
+                else if (good2.Subcategory == "зеркалки")
                 {
                     <ul class="breadcrumb1">
                         <li class="breadcrumb-item home">
@@ -67,39 +67,36 @@
                         </li>
                     </ul>
                 }
-                else if (subcat == "fullframe" || subcat == "apsc")
+                else if (good2.Subcategory == "fullframe" || good2.Subcategory == "apsc")
                 {
-                <ul class="breadcrumb1">
-                    <li class="breadcrumb-item home">
-                        <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="breadcrumb-link" title="Световые приборы" href="/Lens">Объективы</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <span class="breadcrumb-link current-page">@good2.Name</span>
-                    </li>
-                </ul>
+                    <ul class="breadcrumb1">
+                        <li class="breadcrumb-item home">
+                            <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Световые приборы" href="/Lens">Объективы</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-link current-page">@good2.Name</span>
+                        </li>
+                    </ul>
                 }
                 else
                 {
-                <ul class="breadcrumb1">
-                    <li class="breadcrumb-item home">
-                        <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="breadcrumb-link" title="Фотоаппараты" href="/Ph">Фотоаппараты</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <span class="breadcrumb-link current-page">@good2.Name</span>
-                    </li>
-                </ul>
+                    <ul class="breadcrumb1">
+                        <li class="breadcrumb-item home">
+                            <a class="breadcrumb-link" title="Главная" href="/"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a class="breadcrumb-link" title="Каталог" href="/Catalog">Каталог</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="breadcrumb-link current-page">@good2.Name</span>
+                        </li>
+                    </ul>
                 }
 
             </div> <!--назад-->
@@ -144,9 +141,7 @@
 
                 <div class="product-content-wrapper cell-7 cell-12-sm">
                     <div class="product-introtext on-page editor">
-                        Представляем вашему вниманию новейшую вспышку от Godox -
-                        godox ad1200! После долгой разработки и тестировния данный товар появился на наших прилавках! Данная
-                        вспышка сочетает все самое лучшее от прошлой модели - godox ad600, но стала мощнее и лучше!
+                        @good2.P1
                     </div>
 
                     <form class="product-form">
@@ -178,13 +173,21 @@
 
                             <div class="buy">
                                 <div class="product-order-variant variant-shown">
-                                    <button class="product-button button is-primary" type="button" >
+                                    <button class="product-button button is-primary" @onclick="tocart" type="button">
                                         <i class="icon buy-icon fa fa-shopping-cart"></i>
-                                        <span class="button-text" @onclick="tocart">В корзину</span>
+                                        <span class="button-text">В корзину</span>
                                     </button>
                                 </div>
-                            </div> <!-- В корзину -->
 
+                            </div> <!-- В корзину -->
+                            @if (warning == 2)
+                            {
+                                <span class="button-text"  style="color:red">Данный товар уже есть в корзине!</span>
+                            } 
+                            @if(warning == 1)
+                            {
+                                <span class="button-text" style="color:green">Товар добавлен в корзину</span>
+                            }
                         </div>
                     </form>
 
@@ -207,9 +210,9 @@
 
                             <div class="tab-block tabcontent is-active" id="About">
                                 <div class="editor">
-                                    <p><span>Godox ad1200</span></p>
-                                    <p><span><br>Как следует из названия прибора, он имеет мощность 1200 Вт и представляет собой комплект из отдельного блока питания (повер-пак) и головки вспышки, которая соединяется кабелем с блоком. Вспышка способна работать не только в студии, в повер-пак установлен сменный литий-ионный аккумулятор (36V/2600 мАч), так что комплект можно использовать вдали от розетки, а для длительных съёмок можно дополнительно приобрести батарею повышенной емкости (36V/5200 мАч).</span></p>
-                                    <p>Несмотря на новый форм-фактор, AD1200 Pro обладает всеми характеристиками системы освещения AD, например, она совместима с беспроводной X-системой трансмиттеров TTL 2,4 ГГц. Прибор поддерживает до пяти групп и 32-х каналов с работой через дополнительные TTL-приёмопередатчики и совместим с камерами Canon, Nikon, Sony, Fujifilm, Olympus и Panasonic.&nbsp;</p>
+                                    <p><span>@good2.Name</span></p>
+                                    <p><span><br>@good2.P2</span></p>
+                                    <p>@good2.P3</p>
                                 </div>
                             </div><!-- о товаре -->
 
@@ -267,6 +270,7 @@
 
 @code
 {
+    int warning;
     public IList<Good> good;
     public static List<Good> addcart = new List<Good>();
     public static List<Good> addcartqu = new List<Good>();
@@ -327,19 +331,6 @@
             if (i.Idgood == Pages.Main.idTovar)
             {
                 good2 = i;
-                //cat = i.Category;
-                //subcat = i.Subcategory;
-                //name = i.Name;
-                //pic = i.Picture;
-                //pic1 = i.Picture2;
-                //pic2 = i.Picture3;
-                //price = Convert.ToDouble(i.Price);
-                //arc = i.Idgood;
-                //weight = Convert.ToDouble(i.Weight);
-                //height = Convert.ToDouble(i.Height);
-                //lenght = Convert.ToDouble(i.Length);
-                //width = Convert.ToDouble(i.Width);
-                //guarantee = Convert.ToInt32(i.Guarantee);
                 Pages.Main.idTovar = -1;
                 break;
             }
@@ -379,13 +370,19 @@
         }
     }
 
-    void tocart(/*string name2, int qu2*/)
+    void tocart()
     {
-        Header.addcart.Add(good2);
-        Header.addcartqu.Add(qu);
-        //nameto = name2;
-        //qu = qu2;
-        /*NavigationManager.NavigateTo("/Cart")*/
+        var match = Header.addcart.FirstOrDefault(p => p.Name == good2.Name);
+        if (match == null)
+        {
+            warning = 1;
+            Header.addcart.Add(good2);
+            Header.addcartqu.Add(qu);
+        }
+        else
+        {
+            warning = 2;
+        }
 
     }
 }

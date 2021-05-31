@@ -32,40 +32,52 @@
 
                     <div class="set-title">История заказов</div>
                     <div class="set-block">
+                        @if (sortedorder.Count == 0)
+                        {
+                            <div class="notice notice-info text-center aboba">
+                                На данный момент вы не сделали ни одного заказа
+                            </div>
+                            <button class="co-button co-button--checkout aboba aboba1" @onclick="click">Перейти в каталог</button>
+                        }
 
-                        <table class="table table1">
-                            <thead>
-                                <tr>
-                                    <th>Номер заказа</th>
-                                    <th>Дата оформления</th>
-                                    <th>Статус</th>
-                                    <th>Оплата</th>
-                                    <th class="order_amount">Сумма заказа</th>
-                                    <th>Трек-номер</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        else
+                        {
+                            <table class="table table1">
+                                <thead>
+                                    <tr>
+                                        <th>Номер заказа</th>
+                                        <th>Дата заказа</th>
+                                        <th>Статус заказа</th>
+                                        <th>Оплата</th>
+                                        <th class="order_amount">Стоимость</th>
+                                        <th>Трек номер</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                    @foreach (var i in sortedorder)
+                                    {
+                                        <tr class="highlited_row ">
+                                            <td><a><div>@i.Idorder</div></a></td>
+                                            <td><a><div>@i.Date</div></a></td>
+                                            <td><a><div>@i.Paymentmethod</div></a></td>
+                                            <td>
+                                                <a>
+                                                    <div>
+                                                        <span>
+                                                            @i.Status
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td><a><div>@i.Priceoreder&nbsp;руб</div></a></td>
+                                            <td><a><div>@i.Tracknum</div></a></td>
+                                        </tr>
 
-                                <tr class="highlited_row ">
-                                    <td><a><div>1222</div></a></td>
-                                    <td><a><div>27.05.2021 22:05</div></a></td>
-                                    <td><a><div>Принят</div></a></td>
-                                    <td>
-                                        <a>
-                                            <div>
-                                                <span>
-                                                    Не оплачен
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td><a><div>44999&nbsp;руб</div></a></td>
-                                    <td><a><div>ARU899237432</div></a></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                    }
+                                </tbody>
+                            </table>
+                        }
 
                     </div>
                 </div>
@@ -76,13 +88,18 @@
 </html>
 
 @code {
-    double price;
+
     public IList<Buyer> buyer;
+    public IList<Order> order;
+    Order order2;
     string email, name, name2, name3;
+    public List<Order> sortedorder = new List<Order>();
+
     protected override async Task OnInitializedAsync()
     {
         email = await oLocalStore.GetItemAsync<string>("MySessionValue");
         buyer = Service.GetBuyer();
+        order = Service.GetOrder();
         foreach (var i in buyer)
         {
             if (i.Emailbuyer == email)
@@ -92,8 +109,24 @@
                 name3 = i.Third;
             }
         }
-    }
 
+        foreach (var i in buyer)
+        {
+            if (i.Emailbuyer == email)
+            {
+                foreach (var j in order)
+                {
+                    if (i.Idbuyer == j.Idbuyer)
+                        sortedorder.Add(j);
+                }
+            }
+        }
+
+    }
+    public void click()
+    {
+        NavigationManager.NavigateTo("/Catalog");
+    }
     public async void ClearSession()
     {
         Header.changeemail(null);

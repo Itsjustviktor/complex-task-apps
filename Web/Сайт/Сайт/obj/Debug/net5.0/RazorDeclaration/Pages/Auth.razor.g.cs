@@ -125,9 +125,7 @@ using Сайт.Services;
 
         Header.Email = e;
         email = e;
-        //mailHead = email;
-        //Header.changeemail(email);
-        //(() => emailsend(email))
+
     }
 
     public async void SaveSession()
@@ -144,7 +142,7 @@ using Сайт.Services;
 #line hidden
 #nullable disable
 #nullable restore
-#line 99 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Auth.razor"
+#line 97 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Auth.razor"
          foreach (var i in buyer)
         {
             if (email == i.Emailbuyer)
@@ -157,7 +155,7 @@ using Сайт.Services;
 #line hidden
 #nullable disable
 #nullable restore
-#line 105 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Auth.razor"
+#line 103 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Auth.razor"
          
 
         if (buyer1 == null)

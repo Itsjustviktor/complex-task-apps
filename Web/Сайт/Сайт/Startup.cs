@@ -35,6 +35,8 @@ namespace Сайт
             services.AddServerSideBlazor();
             services.AddSingleton<GoodService>();
             services.AddSingleton<UserService>();
+            services.AddSingleton<FeedbackService>();
+            services.AddSingleton<OrderService>();
             services.AddBlazoredLocalStorage();
             services.AddAuthentication("Cookies")
                     .AddCookie();

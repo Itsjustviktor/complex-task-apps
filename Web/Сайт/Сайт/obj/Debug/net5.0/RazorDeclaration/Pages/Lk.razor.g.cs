@@ -105,15 +105,20 @@ using Сайт.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 78 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Lk.razor"
+#line 90 "C:\Users\0\source\repos\Сайт\Сайт\Pages\Lk.razor"
        
-    double price;
+
     public IList<Buyer> buyer;
+    public IList<Order> order;
+    Order order2;
     string email, name, name2, name3;
+    public List<Order> sortedorder = new List<Order>();
+
     protected override async Task OnInitializedAsync()
     {
         email = await oLocalStore.GetItemAsync<string>("MySessionValue");
         buyer = Service.GetBuyer();
+        order = Service.GetOrder();
         foreach (var i in buyer)
         {
             if (i.Emailbuyer == email)
@@ -123,8 +128,24 @@ using Сайт.Services;
                 name3 = i.Third;
             }
         }
-    }
 
+        foreach (var i in buyer)
+        {
+            if (i.Emailbuyer == email)
+            {
+                foreach (var j in order)
+                {
+                    if (i.Idbuyer == j.Idbuyer)
+                        sortedorder.Add(j);
+                }
+            }
+        }
+
+    }
+    public void click()
+    {
+        NavigationManager.NavigateTo("/Catalog");
+    }
     public async void ClearSession()
     {
         Header.changeemail(null);

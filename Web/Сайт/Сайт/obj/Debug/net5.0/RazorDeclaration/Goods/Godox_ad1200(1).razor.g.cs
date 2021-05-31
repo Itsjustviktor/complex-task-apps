@@ -112,8 +112,9 @@ using Сайт.Goodsbuttom;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 269 "C:\Users\0\source\repos\Сайт\Сайт\Goods\Godox_ad1200(1).razor"
+#line 272 "C:\Users\0\source\repos\Сайт\Сайт\Goods\Godox_ad1200(1).razor"
  
+    int warning;
     public IList<Good> good;
     public static List<Good> addcart = new List<Good>();
     public static List<Good> addcartqu = new List<Good>();
@@ -174,19 +175,6 @@ using Сайт.Goodsbuttom;
             if (i.Idgood == Pages.Main.idTovar)
             {
                 good2 = i;
-                //cat = i.Category;
-                //subcat = i.Subcategory;
-                //name = i.Name;
-                //pic = i.Picture;
-                //pic1 = i.Picture2;
-                //pic2 = i.Picture3;
-                //price = Convert.ToDouble(i.Price);
-                //arc = i.Idgood;
-                //weight = Convert.ToDouble(i.Weight);
-                //height = Convert.ToDouble(i.Height);
-                //lenght = Convert.ToDouble(i.Length);
-                //width = Convert.ToDouble(i.Width);
-                //guarantee = Convert.ToInt32(i.Guarantee);
                 Pages.Main.idTovar = -1;
                 break;
             }
@@ -226,13 +214,19 @@ using Сайт.Goodsbuttom;
         }
     }
 
-    void tocart(/*string name2, int qu2*/)
+    void tocart()
     {
-        Header.addcart.Add(good2);
-        Header.addcartqu.Add(qu);
-        //nameto = name2;
-        //qu = qu2;
-        /*NavigationManager.NavigateTo("/Cart")*/
+        var match = Header.addcart.FirstOrDefault(p => p.Name == good2.Name);
+        if (match == null)
+        {
+            warning = 1;
+            Header.addcart.Add(good2);
+            Header.addcartqu.Add(qu);
+        }
+        else
+        {
+            warning = 2;
+        }
 
     }
 

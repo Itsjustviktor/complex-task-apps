@@ -5,40 +5,33 @@ using System.Threading.Tasks;
 
 namespace Сайт.Services
 {
-    public class UserService
+    public class OrderService
     {
         protected inetmagazContext dB;
-        public UserService()
+        public OrderService()
         {
         }
 
-        public bool InsertUser(Buyer buyer)
+        public bool InsertOrder(Order order)
         {
             using (dB = new inetmagazContext())
             {
-                dB.Buyers.Add(buyer);
+                dB.Orders.Add(order);
                 dB.SaveChanges();
                 return true;
             }
-        } //добавление
-
-        public List<Buyer> GetBuyer()
-        {
-            using (dB = new inetmagazContext())
-            {
-                return dB.Buyers.ToList();
-            }
         }
-
-        public List<Order> GetOrder()
+        public bool InsertOrderedGood(Orderedgood orderedgood)
         {
             using (dB = new inetmagazContext())
             {
-                return dB.Orders.ToList();
+                dB.Orderedgoods.Add(orderedgood);
+                
+                    dB.SaveChanges();
+                
+                return true;
             }
         }
 
     }
-
-
 }

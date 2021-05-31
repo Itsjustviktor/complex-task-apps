@@ -120,18 +120,31 @@ using Сайт.Services;
     }
     protected override void OnInitialized()
     {
-        good = Service.GetGoods();
-        foreach (var i in good)
+        if (Header.namefind == null)
         {
-            if (i.Category == "фотокамеры" || i.Category == "объектив" || i.Category == "свет" && i.Quantity >= 1)
+            good = Service.GetGoods();
+            foreach (var i in good)
             {
-                sortedgood.Add(i);
+                if (i.Category == "фотокамеры" || i.Category == "объектив" || i.Category == "свет" && i.Quantity >= 1)
+                {
+                    sortedgood.Add(i);
+                }
+            }
+        }
+        else
+        {
+            good = Service.GetGoods();
+            foreach (var i in good)
+            {
+                if (i.Firm == Header.namefind || i.Subfirm == Header.namefind || i.Name == Header.namefind && i.Quantity >= 1)
+                {
+                    sortedgood.Add(i);
+                }
             }
         }
     }
     private void sort(ChangeEventArgs eventArgs)
     {
-        Console.WriteLine(eventArgs.Value.ToString());
         if (eventArgs.Value.ToString() == "price")
         {
             sortedgood = sortedgood.OrderBy(C => C.Price).ToList();

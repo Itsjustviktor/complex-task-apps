@@ -12,5 +12,6 @@ namespace Сайт
         public string Secondname { get; set; }
         public string Thirdname { get; set; }
         public string Post { get; set; }
+        public string Password { get; set; }
     }
 }

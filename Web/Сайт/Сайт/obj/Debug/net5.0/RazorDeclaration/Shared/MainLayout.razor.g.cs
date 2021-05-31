@@ -103,6 +103,20 @@ using Сайт.Services;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 10 "C:\Users\0\source\repos\Сайт\Сайт\Shared\MainLayout.razor"
+      
+    MudTheme MyCustomTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = Colors.Blue.Darken1,
+        }
+    };
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

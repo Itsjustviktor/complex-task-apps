@@ -1,6 +1,8 @@
 ﻿@page "/Cart"
 @inject Blazored.LocalStorage.ILocalStorageService oLocalStore
 @inject UserService Service
+@inject OrderService Service1
+@inject GoodService Service2
 @inject NavigationManager NavigationManager
 
 <html>
@@ -9,24 +11,25 @@
         <div class="container page-inner ">
 
             @*if (корзина пуста)
-        {
-        <div class="notice notice-info text-center">
-            Ваша корзина пуста
-        </div>
-        }*@
-            @if (email == null)
-            {
-                <div class="notice notice-info text-center aboba">
-                    Для продолжения оформления заказа, пожалуйста, авторизуйтесь
+                {
+                <div class="notice notice-info text-center">
+                    Ваша корзина пуста
                 </div>
-                <button class="co-button co-button--checkout aboba aboba1" @onclick="click">Личный кабинет</button>
-            }
-            else if (Header.addcart.Count == 0)
+                }*@
+            @if (Header.addcart.Count == 0)
             {
                 <div class="notice notice-info text-center aboba">
                     Ваша корзина пуста, добавьте, пожалуйста, товары
                 </div>
                 <button class="co-button co-button--checkout aboba aboba1" @onclick="clicktocat">Перейти в каталог</button>
+
+            }
+            else if (email == null)
+            {
+                <div class="notice notice-info text-center aboba">
+                    Для продолжения оформления заказа, пожалуйста, авторизуйтесь
+                </div>
+                <button class="co-button co-button--checkout aboba aboba1" @onclick="click">Личный кабинет</button>
             }
             else
             {
@@ -48,7 +51,7 @@
 
                                 <div class="co-basket co-checkout-block--padded">
 
-
+                                    <div style="visibility:hidden">@(count=0)</div>
                                     @foreach (var i in Header.addcart)
                                     {
                                         <div class="co-basket_item-list">
@@ -58,18 +61,24 @@
                                                         <img alt="image" src="@i.Picture">
                                                     </div>
                                                 </div>
-                                                <div class="co-basket_item-description">@i.Name</div>
+                                                <div class="co-basket_item-description"> @i.Name</div>
                                                 <div class="co-basket_item-total">
                                                     <span class="co-basket_item-count">@Header.addcartqu[count]</span> x
                                                     <span class="co-basket_item-price co-price--current">@i.Price&nbsp;руб</span>
                                                 </div>
-                                                <button type="submit" class="item-delete button is-transparent">
-                                                    <i class="fa fa-remove"></i>
-                                                </button>
+
+                                                @*<button type="submit" class="item-delete button is-transparent" onclick="() => delete (@i.Name)">
+                                                        <i class="fa fa-remove">
+                                                        </i>
+                                                    </button>*@
+
                                             </div>
                                         </div>
                                         count++;
                                     }
+
+
+                                    <button class="co-button co-button--checkout aboba" style="margin-left: 15rem" @onclick="clear">Очистить корзину</button>
 
                                     <div class="co-basket_subtotal-list">
 
@@ -80,7 +89,7 @@
 
                                         <div class="co-basket_subtotal">
                                             <div class="co-basket_subtotal-title">Стоимость доставки</div>
-                                            <div class="co-basket_subtotal-price co-price--current">0&nbsp;руб</div>
+                                            <div class="co-basket_subtotal-price co-price--current">@dost&nbsp;руб</div>
                                         </div>
                                         <!--стоимость доставки-->
 
@@ -88,7 +97,7 @@
 
                                     <div class="co-basket_total">
                                         <div class="co-basket_total-title">Итого:</div>
-                                        <div class="co-basket_total-price co-price--current">142989&nbsp;руб</div>
+                                        <div class="co-basket_total-price co-price--current">@all&nbsp;руб</div>
                                     </div> <!--итоговая стоимость-->
 
                                 </div>
@@ -114,15 +123,33 @@
                                 </div> <!--инф о пользователе-->
 
                                 <h2 class="co-title co-title--h2">Доставка</h2>
-                                <div class="co-checkout-block">
-                                    <div class="co-input co-input--required">
-                                        <input id="shipping_address_country" type="hidden" value="RU">
-                                        <div class="co-input co-input--required co-input--text co-input--full_locality_name  co-input--nested">
-                                            <label class="co-input-label" for="shipping_address_full_locality_name">Населенный пункт</label>
-                                            <input class="co-input-field" value="г Киров, Кировская обл.">
+
+                                @if (change == 1)
+                                {
+                                    <div class="co-checkout-block">
+                                        <div class="co-input co-input--required">
+                                            <input id="shipping_address_country" type="hidden" value="RU">
+                                            <div class="co-input co-input--required co-input--text co-input--full_locality_name  co-input--nested">
+                                                <label class="co-input-label" for="shipping_address_full_locality_name" disabled>Населенный пункт</label>
+                                                <input class="co-input-field" @bind-value="@adress" disabled @bind-value:event="oninput">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
+                                @if (change == 2)
+                                {
+                                    <div class="co-checkout-block">
+                                        <div class="co-input co-input--required">
+                                            <input id="shipping_address_country" type="hidden" value="RU">
+                                            <div class="co-input co-input--required co-input--text co-input--full_locality_name  co-input--nested">
+                                                <label class="co-input-label" for="shipping_address_full_locality_name">Населенный пункт</label>
+                                                <input class="co-input-field" @bind-value="@adress" @bind-value:event="oninput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                
+
                                 <div class="variants delivery_variants co-input co-input--required co-input--radio co-tabs" style="z-index: inherit;">
                                     <input name="shipping_address[no_delivery]" type="hidden" value="0">
                                     <input style="display: none" type="checkbox" value="1" checked="checked" name="shipping_address[no_delivery]" id="shipping_address_no_delivery">
@@ -131,7 +158,7 @@
 
                                         <label class="co-delivery_method co-input-wrapper co-toggable_field co-toggable_field--bordered" for="order_delivery_variant_id_766248">
                                             <span class="radio co-delivery_method-input co-toggable_field-input co-toggable_field-input--radio">
-                                                <input checked="checked" class="radio_button" data-delivery-id="766248" id="order_delivery_variant_id_766248" name="order[delivery_variant_id]" rel="#price_766248" type="radio" value="766248" style="cursor: pointer; opacity: 1;">
+                                                <input @onclick="office" checked="checked" class="radio_button" data-delivery-id="766248" id="order_delivery_variant_id_766248" name="order[delivery_variant_id]" rel="#price_766248" type="radio" value="office" style="cursor: pointer; opacity: 1;">
                                                 <span>
                                                 </span>
                                             </span>
@@ -144,9 +171,10 @@
                                             <span class="co-delivery_method-price co-toggable_field-price co-price--current" id="price_766248" data-price="0">+ 0&nbsp;руб</span>
                                             <span class="co-delivery_method-price co-toggable_field-price co-price--current" id="price_range_766248" style="display: none"></span>
                                         </label>
+
                                         <label class="co-delivery_method co-input-wrapper co-toggable_field co-toggable_field--bordered" for="order_delivery_variant_id_766247">
                                             <span class="radio co-delivery_method-input co-toggable_field-input co-toggable_field-input--radio">
-                                                <input class="radio_button js-input-field" data-delivery-id="766247" id="order_delivery_variant_id_766247" name="order[delivery_variant_id]" rel="#price_766247" type="radio" value="766247" style="cursor: pointer; opacity: 1;">
+                                                <input @onclick="dostavka" class="radio_button js-input-field" data-delivery-id="766247" id="order_delivery_variant_id_766247" name="order[delivery_variant_id]" rel="#price_766247" type="radio" value="dostavka" style="cursor: pointer; opacity: 1;">
                                                 <span>
                                                 </span>
                                             </span>
@@ -158,14 +186,15 @@
                                             </span>
                                             <span class="co-delivery_method-price co-toggable_field-price co-price--current" id="price_766247" data-price="200">+ 200&nbsp;руб</span>
                                             <span class="co-delivery_method-price co-toggable_field-price co-price--current" id="price_range_766247" style="display: none"></span>
-                                        </label><div class="co-modal co-modal--outlet co-modal--fixed co-modal--hide">
+                                        </label>
+                                        <div class="co-modal co-modal--outlet co-modal--fixed co-modal--hide">
                                             <!--радиобаттомы-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="co-button co-button--checkout">Подтвердить заказ</button>
+                            <button class="co-button co-button--checkout" @onclick="add">Подтвердить заказ</button>
                         </form>
                     </div>
                 </div>
@@ -176,10 +205,15 @@
 </html>
 
 @code {
+    string adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
     string email;
     string name, name2, name3, phone;
     int count = 0;
+    int idbuyer;
+    int change = 1;
     double summ = 0;
+    double dost = 0;
+    double all;
     public IList<Buyer> buyer;
     protected override async Task OnInitializedAsync()
     {
@@ -193,17 +227,24 @@
                 name2 = i.Second;
                 name3 = i.Third;
                 phone = i.Telephonebuyer;
+                idbuyer = i.Idbuyer;
             }
         }
-
-        foreach(var i in Header.addcart)
+        count = 0;
+        foreach (var i in Header.addcart)
         {
-            //i.Picture = PickerVariantsdf;
             summ += Convert.ToDouble(i.Price) * Header.addcartqu[count];
             count++;
-
         }
+        all = summ;
         count = 0;
+        sendsum();
+    }
+
+    void sendsum()
+    {
+        Header.changesumm(summ);
+        Header.summ = summ;
     }
     public async void ClearSession()
     {
@@ -223,4 +264,97 @@
     {
         NavigationManager.NavigateTo("/Catalog");
     }
+
+    public void clear()
+    {
+        Header.addcart.Clear();
+        Header.addcartqu.Clear();
+        summ = 0;
+        sendsum();
+    }
+
+    public void office()
+    {
+        if (dost == 200)
+        {
+            all = all - dost;
+            dost = 0;
+            change = 1;
+            adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
+            sendsum();
+        }
+        else
+        {
+            all = summ;
+            change = 1;
+            adress = "г. Киров, ул. Чапаева, дом 10, офис 201";
+            sendsum();
+        }
+    }
+
+    public void dostavka()
+    {
+        dost = 200;
+        all = summ + dost;
+        change = 2;
+        adress = "Россия, г.Киров 610000";
+        sendsum();
+    }
+
+    public Order order = new Order();
+
+    public void add()
+    {
+        if (change == 1)
+        {
+            order.Status = "Ждет получателя в офисе";
+            order.Priceoreder = summ;
+            order.Paymentmethod = "Не оплачено";
+            order.Takemethod = "Из офиса";
+            order.Idbuyer = idbuyer;
+            order.Tracknum = "-";
+            order.Adress = adress;
+            order.Date = DateTime.Now;
+            Service1.InsertOrder(order);
+        }
+        if (change == 2)
+        {
+            order.Status = "Сбор заказа";
+            order.Priceoreder = summ + dost;
+            order.Paymentmethod = "Не оплачено";
+            order.Takemethod = "Почта России";
+            order.Idbuyer = idbuyer;
+            order.Tracknum = "-";
+            order.Adress = adress;
+            order.Date = DateTime.Now;
+            Service1.InsertOrder(order);
+        }
+
+        int k = 0;
+        foreach (var i in Header.addcart)
+        {
+            Orderedgood orderedgood = new Orderedgood();
+            Service2.UpdateGood(i, Header.addcartqu[k]);
+            orderedgood.Idgood = i.Idgood;
+            orderedgood.Quantityorderedgoods = Header.addcartqu[k];
+            orderedgood.Price = i.Price;
+            orderedgood.Idorder = order.Idorder;
+            Service1.InsertOrderedGood(orderedgood);
+            k++;
+        }
+
+        clear();
+        NavigationManager.NavigateTo("/");
+    }
+
+    //private void delete(string a)
+    //{
+    //    count = 0;
+    //    var index = Header.addcart.FindIndex(i => i.Name == a);
+    //    Header.addcart.RemoveAt(index);
+
+    //    var index2 = Header.addcartqu.FindIndex(i => i == b);
+    //    Header.addcartqu.RemoveAt(index2);
+
+    //}
 }

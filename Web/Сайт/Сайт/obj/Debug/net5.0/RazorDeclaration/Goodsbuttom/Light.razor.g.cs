@@ -105,13 +105,16 @@ using Сайт.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 185 "C:\Users\0\source\repos\Сайт\Сайт\Goodsbuttom\Light.razor"
+#line 186 "C:\Users\0\source\repos\Сайт\Сайт\Goodsbuttom\Light.razor"
        
+    bool full = true;
+    bool crop = false;
     string name;
     string pic;
     double price;
     public IList<Good> good;
     public List<Good> sortedgood = new List<Good>();
+    public List<Good> sortedgood2 = new List<Good>();
     public static int idTovar;
 
     private void namesend(Good good)
@@ -128,6 +131,7 @@ using Сайт.Services;
             if (i.Category == "свет" && i.Quantity >= 1)
             {
                 sortedgood.Add(i);
+                sortedgood2.Add(i);
             }
         }
     }
@@ -145,6 +149,54 @@ using Сайт.Services;
             sortedgood = sortedgood.OrderByDescending(C => C.Price).ToList();
             Console.WriteLine("зашел в дпрайс");
         }
+    }
+
+    private void true1(ChangeEventArgs obj)
+    {
+        if (full == false)
+        {
+            crop = false;
+            full = true;
+        }
+        if (crop == true)
+        {
+            crop = false;
+            full = true;
+        }
+    }
+
+    private void true2(ChangeEventArgs obj)
+    {
+        if (crop == false)
+        {
+            crop = true;
+            full = false;
+        }
+        if (full == true)
+        {
+            crop = true;
+            full = false;
+        }
+    }
+
+    private void sort2()
+    {
+        if (full == true)
+        {
+            sortedgood = sortedgood2;
+            sortedgood = sortedgood.Where(c => c.Subcategory == "импульсный свет").ToList();
+            full = true;
+        }
+        if (crop == true)
+        {
+            sortedgood = sortedgood2;
+            sortedgood = sortedgood.Where(c => c.Subcategory == "постоянный свет").ToList();
+            crop = false;
+        }
+    }
+    private void sort3()
+    {
+        sortedgood = sortedgood2;
     }
 
 #line default

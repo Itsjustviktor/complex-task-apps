@@ -61,7 +61,7 @@
                         <!--Каталог-->
                     </div>
 
-                    <form class="collection-filter">
+                    <a class="collection-filter">
 
 
                         <div class="collection-filter-header">
@@ -76,27 +76,28 @@
                             </a>
                             <div class="filter-items-wrapper">
 
-                                <ul class="filter-items-list scrollable">
+                                <a class="filter-items-list scrollable">
 
-                                    <li class="filter-item">
-                                        <input class="radbut" type="radio" id="huey" name="drone" value="impuls"
-                                               checked>
-                                        <label class="radbutL" for="impuls">На полнокадровую матрицу</label>
-                                    </li>
-
-                                    <li class="filter-item">
-                                        <input class="radbut" type="radio" id="huey" name="drone" value="impuls"
-                                               checked>
-                                        <label class="radbutL" for="impuls">На кропнутую матрицу</label>
-                                    </li>
-                                </ul>
+                                    <div class="filter-item"> 
+                                        <input class="radbut" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="@full" @onchange="true1"  checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            На полнокадровую матрицу
+                                        </label>
+                                    </div>
+                                    <div class="filter-item">
+                                        <input class="radbut" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="@crop" @onchange="true2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            На кропнутую матрицу
+                                        </label>
+                                    </div>
+                                </a>
 
                             </div>
 
                         </div>
-                        <button type="submit" class="filter-submit button is-primary">Применить</button>
-                        <a href="/collection/fotoapparaty" type="button" class="filters-clear button">Сбросить фильтры</a>
-                    </form>
+                        <button class="filter-submit button is-primary" @onclick="sort2">Применить</button>
+                        <button type="button" class="filters-clear button" @onclick="sort3">Сбросить фильтры</button>
+                    </a>
 
                 </div>
 
@@ -146,27 +147,27 @@
 
                         @foreach (var i in sortedgood)
                         {
-                        <div class="product-card-wrapper cell-4 cell-6-md cell-12-mc">
-                            <a class="product-card product-link" @onclick="(()=>namesend(i.Idgood))">
-                                <div class="card-inner ">
-                                    <div class="product-photo">
-                                        <div class="product-link image-container is-square ">
-                                            <img src="@i.Picture" alt="" title="" class="product-image">
+                            <div class="product-card-wrapper cell-4 cell-6-md cell-12-mc">
+                                <a class="product-card product-link" @onclick="(()=>namesend(i.Idgood))">
+                                    <div class="card-inner ">
+                                        <div class="product-photo">
+                                            <div class="product-link image-container is-square ">
+                                                <img src="@i.Picture" alt="" title="" class="product-image">
+                                            </div>
+                                            <div class="product-prices in-card">
+                                                <div class="price in-card">
+                                                    @i.Price&nbsp;руб
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="product-prices in-card">
-                                            <div class="price in-card">
-                                                @i.Price&nbsp;руб
+                                        <div class="product-caption product-link">
+                                            <div class="product-title in-card">
+                                                @i.Name
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-caption product-link">
-                                        <div class="product-title in-card">
-                                            @i.Name
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         }
                     </div>
                     <!--Продукты-->
@@ -180,11 +181,14 @@
 </html>
 
 @code {
+    bool full = true;
+    bool crop = false;
     string name;
     string pic;
     double price;
     public IList<Good> good;
     public List<Good> sortedgood = new List<Good>();
+    public List<Good> sortedgood2 = new List<Good>();
     public static int idTovar;
     private void namesend(int id)
     {
@@ -199,6 +203,7 @@
             if (i.Category == "объектив" && i.Quantity >= 1)
             {
                 sortedgood.Add(i);
+                sortedgood2.Add(i);
             }
         }
     }
@@ -215,5 +220,53 @@
             sortedgood = sortedgood.OrderByDescending(C => C.Price).ToList();
             Console.WriteLine("зашел в дпрайс");
         }
+    }
+
+    private void true1(ChangeEventArgs obj)
+    {
+        if (full == false)
+        {
+            crop = false;
+            full = true;
+        }
+        if (crop == true)
+        {
+            crop = false;
+            full = true;
+        }
+    }
+   
+    private void true2(ChangeEventArgs obj)
+    {
+        if (crop == false)
+        {
+            crop = true;
+            full = false;
+        }
+        if (full == true)
+        {
+            crop = true;
+            full = false;
+        }
+    }
+
+    private void sort2()
+    {
+        if (full == true)
+        {
+            sortedgood = sortedgood2;
+            sortedgood = sortedgood.Where(c => c.Subcategory == "fullframe").ToList();
+            full = true;
+        }
+        if (crop == true)
+        {
+            sortedgood = sortedgood2;
+            sortedgood = sortedgood.Where(c => c.Subcategory == "apsc").ToList();
+            crop = false;
+        }
+    }
+    private void sort3()
+    {
+        sortedgood = sortedgood2;
     }
 }
