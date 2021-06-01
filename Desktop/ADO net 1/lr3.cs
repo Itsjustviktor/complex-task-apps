@@ -16,10 +16,19 @@ namespace ExampleAdoNet
         string strSQL;
         NpgsqlConnection cn;
         string connectionString = "Server=localhost; Port=5432; User Id=postgres; Password=1234; Database=inetmagaz";
-
-        public lr3()
+        int idcheck;
+        public lr3(string name, string telnum, string problem, string solve, int id)
         {
             InitializeComponent();
+            textBox4.Text = name;
+            textBox3.Text = telnum;
+            textBox1.Text = problem;
+            comboBox1.Text = solve;
+            idcheck = id;
+        }
+
+        private void lr3_Load(object sender, EventArgs e)
+        {
             using (cn = new NpgsqlConnection(connectionString))
             {
                 try
@@ -40,33 +49,43 @@ namespace ExampleAdoNet
                     MessageBox.Show("не повезло");
                 }
             }
-
-        }
-
-        private void lr3_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             using (cn = new NpgsqlConnection(connectionString))
             {
-                
                 try
                 {
-                    cn.Open();
-                    strSQL = "INSERT INTO feedback (firstname, telnumber, problem, solve) VALUES ('" + textBox4.Text + "','" + textBox3.Text
-                        + "','" + textBox1.Text + "','" + comboBox1.Text + "')";
+                    NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
+                    npgSqlConnection.Open();
 
-                    NpgsqlCommand cmd = new NpgsqlCommand(strSQL, cn);
-                    if (cmd.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Запись успешно добавлена!");
-                    cn.Close();
+                    if(comboBox1.Text == "решено")
+                    { 
+                    string strSQL = "UPDATE feedback SET problem = '" + textBox4.Text + "', solve = '" + textBox1.Text + "', \"end\" = true WHERE idfeedback = " + idcheck + ""; ;
+                    NpgsqlCommand command = new NpgsqlCommand(strSQL, npgSqlConnection);
+                    if (command.ExecuteNonQuery() == 1) MessageBox.Show("Запись обновлена!");
+                    npgSqlConnection.Close();
+                    }
+                    if (comboBox1.Text == "нерешено")
+                    {
+                        string strSQL = "UPDATE feedback SET problem = '" + textBox4.Text + "', solve = '" + textBox1.Text + "', \"end\" = false WHERE idfeedback = " + idcheck + "";
+                        NpgsqlCommand command = new NpgsqlCommand(strSQL, npgSqlConnection);
+                        if (command.ExecuteNonQuery() == 1) MessageBox.Show("Запись обновлена!");
+                        npgSqlConnection.Close();
+                    }
+                    if (comboBox1.Text == "перезвонить")
+                    {
+                        string strSQL = "UPDATE feedback SET problem = '"+ textBox4.Text +"', solve = '" + textBox1.Text + "', \"end\" = false WHERE idfeedback = " + idcheck + "";
+                        NpgsqlCommand command = new NpgsqlCommand(strSQL, npgSqlConnection);
+                        if (command.ExecuteNonQuery() == 1) MessageBox.Show("Запись обновлена!");
+                        npgSqlConnection.Close();
+                    }
+
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("не повезло2");
+                    MessageBox.Show(ex.Message);
                 }
             } 
 
@@ -75,6 +94,11 @@ namespace ExampleAdoNet
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

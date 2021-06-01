@@ -30,11 +30,6 @@ namespace ExampleAdoNet
         private void InitializeComponent()
         {
             this.dg1 = new System.Windows.Forms.DataGridView();
-            this.idCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.refresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textb_id = new System.Windows.Forms.TextBox();
@@ -52,63 +47,38 @@ namespace ExampleAdoNet
             this.checkb_third = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.npgsqlCommand1 = new Npgsql.NpgsqlCommand();
+            this.label3 = new System.Windows.Forms.Label();
+            this.idCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tracknumCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.SuspendLayout();
             // 
             // dg1
             // 
+            this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCol,
             this.numberCol,
             this.statusCol,
             this.dateCol,
-            this.priceCol});
+            this.priceCol,
+            this.tracknumCol});
             this.dg1.Location = new System.Drawing.Point(14, 227);
             this.dg1.Name = "dg1";
             this.dg1.RowHeadersWidth = 51;
             this.dg1.RowTemplate.Height = 24;
-            this.dg1.Size = new System.Drawing.Size(756, 283);
+            this.dg1.Size = new System.Drawing.Size(872, 338);
             this.dg1.TabIndex = 0;
-            // 
-            // idCol
-            // 
-            this.idCol.HeaderText = "id заказа";
-            this.idCol.MinimumWidth = 6;
-            this.idCol.Name = "idCol";
-            this.idCol.Width = 125;
-            // 
-            // numberCol
-            // 
-            this.numberCol.HeaderText = "Номер телефона";
-            this.numberCol.MinimumWidth = 6;
-            this.numberCol.Name = "numberCol";
-            this.numberCol.Width = 200;
-            // 
-            // statusCol
-            // 
-            this.statusCol.HeaderText = "Статус заказа";
-            this.statusCol.MinimumWidth = 6;
-            this.statusCol.Name = "statusCol";
-            this.statusCol.Width = 125;
-            // 
-            // dateCol
-            // 
-            this.dateCol.HeaderText = "Дата заказа";
-            this.dateCol.MinimumWidth = 6;
-            this.dateCol.Name = "dateCol";
-            this.dateCol.Width = 125;
-            // 
-            // priceCol
-            // 
-            this.priceCol.HeaderText = "Цена заказа";
-            this.priceCol.MinimumWidth = 6;
-            this.priceCol.Name = "priceCol";
-            this.priceCol.Width = 125;
+            this.dg1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg1_RowHeaderMouseDoubleClick);
             // 
             // refresh
             // 
-            this.refresh.Location = new System.Drawing.Point(799, 459);
+            this.refresh.Location = new System.Drawing.Point(905, 459);
             this.refresh.Name = "refresh";
             this.refresh.Size = new System.Drawing.Size(125, 51);
             this.refresh.TabIndex = 1;
@@ -128,7 +98,7 @@ namespace ExampleAdoNet
             // textb_id
             // 
             this.textb_id.Enabled = false;
-            this.textb_id.Location = new System.Drawing.Point(29, 65);
+            this.textb_id.Location = new System.Drawing.Point(34, 65);
             this.textb_id.Name = "textb_id";
             this.textb_id.Size = new System.Drawing.Size(180, 22);
             this.textb_id.TabIndex = 3;
@@ -136,14 +106,14 @@ namespace ExampleAdoNet
             // textb_number
             // 
             this.textb_number.Enabled = false;
-            this.textb_number.Location = new System.Drawing.Point(29, 104);
+            this.textb_number.Location = new System.Drawing.Point(34, 104);
             this.textb_number.Name = "textb_number";
             this.textb_number.Size = new System.Drawing.Size(180, 22);
             this.textb_number.TabIndex = 5;
             // 
             // find
             // 
-            this.find.Location = new System.Drawing.Point(29, 153);
+            this.find.Location = new System.Drawing.Point(34, 153);
             this.find.Name = "find";
             this.find.Size = new System.Drawing.Size(128, 40);
             this.find.TabIndex = 7;
@@ -153,7 +123,7 @@ namespace ExampleAdoNet
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(815, 533);
+            this.button1.Location = new System.Drawing.Point(918, 535);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 30);
             this.button1.TabIndex = 8;
@@ -164,7 +134,7 @@ namespace ExampleAdoNet
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(633, 107);
+            this.label4.Location = new System.Drawing.Point(638, 107);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 17);
             this.label4.TabIndex = 12;
@@ -173,7 +143,7 @@ namespace ExampleAdoNet
             // textb_first
             // 
             this.textb_first.Enabled = false;
-            this.textb_first.Location = new System.Drawing.Point(430, 104);
+            this.textb_first.Location = new System.Drawing.Point(435, 104);
             this.textb_first.Name = "textb_first";
             this.textb_first.Size = new System.Drawing.Size(180, 22);
             this.textb_first.TabIndex = 11;
@@ -181,7 +151,7 @@ namespace ExampleAdoNet
             // textb_second
             // 
             this.textb_second.Enabled = false;
-            this.textb_second.Location = new System.Drawing.Point(430, 65);
+            this.textb_second.Location = new System.Drawing.Point(435, 65);
             this.textb_second.Name = "textb_second";
             this.textb_second.Size = new System.Drawing.Size(180, 22);
             this.textb_second.TabIndex = 9;
@@ -189,7 +159,7 @@ namespace ExampleAdoNet
             // textb_third
             // 
             this.textb_third.Enabled = false;
-            this.textb_third.Location = new System.Drawing.Point(430, 141);
+            this.textb_third.Location = new System.Drawing.Point(435, 141);
             this.textb_third.Name = "textb_third";
             this.textb_third.Size = new System.Drawing.Size(180, 22);
             this.textb_third.TabIndex = 13;
@@ -197,7 +167,7 @@ namespace ExampleAdoNet
             // checkb_id
             // 
             this.checkb_id.AutoSize = true;
-            this.checkb_id.Location = new System.Drawing.Point(235, 65);
+            this.checkb_id.Location = new System.Drawing.Point(240, 65);
             this.checkb_id.Name = "checkb_id";
             this.checkb_id.Size = new System.Drawing.Size(90, 21);
             this.checkb_id.TabIndex = 15;
@@ -208,7 +178,7 @@ namespace ExampleAdoNet
             // checkb_number
             // 
             this.checkb_number.AutoSize = true;
-            this.checkb_number.Location = new System.Drawing.Point(235, 104);
+            this.checkb_number.Location = new System.Drawing.Point(240, 104);
             this.checkb_number.Name = "checkb_number";
             this.checkb_number.Size = new System.Drawing.Size(143, 21);
             this.checkb_number.TabIndex = 16;
@@ -219,7 +189,7 @@ namespace ExampleAdoNet
             // checkb_second
             // 
             this.checkb_second.AutoSize = true;
-            this.checkb_second.Location = new System.Drawing.Point(636, 65);
+            this.checkb_second.Location = new System.Drawing.Point(641, 65);
             this.checkb_second.Name = "checkb_second";
             this.checkb_second.Size = new System.Drawing.Size(92, 21);
             this.checkb_second.TabIndex = 17;
@@ -230,7 +200,7 @@ namespace ExampleAdoNet
             // checkb_first
             // 
             this.checkb_first.AutoSize = true;
-            this.checkb_first.Location = new System.Drawing.Point(636, 103);
+            this.checkb_first.Location = new System.Drawing.Point(641, 103);
             this.checkb_first.Name = "checkb_first";
             this.checkb_first.Size = new System.Drawing.Size(57, 21);
             this.checkb_first.TabIndex = 18;
@@ -241,7 +211,7 @@ namespace ExampleAdoNet
             // checkb_third
             // 
             this.checkb_third.AutoSize = true;
-            this.checkb_third.Location = new System.Drawing.Point(635, 142);
+            this.checkb_third.Location = new System.Drawing.Point(640, 142);
             this.checkb_third.Name = "checkb_third";
             this.checkb_third.Size = new System.Drawing.Size(93, 21);
             this.checkb_third.TabIndex = 19;
@@ -264,11 +234,57 @@ namespace ExampleAdoNet
             this.npgsqlCommand1.Transaction = null;
             this.npgsqlCommand1.UnknownResultTypeList = null;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(396, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 17);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "--------------------------";
+            // 
+            // idCol
+            // 
+            this.idCol.HeaderText = "id заказа";
+            this.idCol.MinimumWidth = 6;
+            this.idCol.Name = "idCol";
+            // 
+            // numberCol
+            // 
+            this.numberCol.HeaderText = "Номер телефона";
+            this.numberCol.MinimumWidth = 6;
+            this.numberCol.Name = "numberCol";
+            // 
+            // statusCol
+            // 
+            this.statusCol.HeaderText = "Статус заказа";
+            this.statusCol.MinimumWidth = 6;
+            this.statusCol.Name = "statusCol";
+            // 
+            // dateCol
+            // 
+            this.dateCol.HeaderText = "Дата заказа";
+            this.dateCol.MinimumWidth = 6;
+            this.dateCol.Name = "dateCol";
+            // 
+            // priceCol
+            // 
+            this.priceCol.HeaderText = "Цена заказа";
+            this.priceCol.MinimumWidth = 6;
+            this.priceCol.Name = "priceCol";
+            // 
+            // tracknumCol
+            // 
+            this.tracknumCol.HeaderText = "Трек номер";
+            this.tracknumCol.MinimumWidth = 6;
+            this.tracknumCol.Name = "tracknumCol";
+            // 
             // Orders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 575);
+            this.ClientSize = new System.Drawing.Size(1042, 577);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkb_third);
             this.Controls.Add(this.checkb_first);
@@ -304,11 +320,6 @@ namespace ExampleAdoNet
         private System.Windows.Forms.TextBox textb_number;
         private System.Windows.Forms.Button find;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numberCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textb_first;
         private System.Windows.Forms.TextBox textb_second;
@@ -320,5 +331,12 @@ namespace ExampleAdoNet
         private System.Windows.Forms.CheckBox checkb_third;
         private System.Windows.Forms.Label label2;
         private Npgsql.NpgsqlCommand npgsqlCommand1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn numberCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tracknumCol;
     }
 }

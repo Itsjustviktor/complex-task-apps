@@ -147,6 +147,12 @@
     <Compile Include="Add.Designer.cs">
       <DependentUpon>Add.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddMore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMore.Designer.cs">
+      <DependentUpon>AddMore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Backcall.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Orderedgood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Orderedgood.Designer.cs">
+      <DependentUpon>Orderedgood.cs</DependentUpon>
     </Compile>
     <Compile Include="lr3.cs">
       <SubType>Form</SubType>
@@ -188,11 +200,17 @@
     <EmbeddedResource Include="Add.resx">
       <DependentUpon>Add.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddMore.resx">
+      <DependentUpon>AddMore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Backcall.resx">
       <DependentUpon>Backcall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Orderedgood.resx">
+      <DependentUpon>Orderedgood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="lr3.resx">
       <DependentUpon>lr3.cs</DependentUpon>

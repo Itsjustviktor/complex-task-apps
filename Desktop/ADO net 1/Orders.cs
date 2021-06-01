@@ -18,6 +18,8 @@ namespace ExampleAdoNet
         public Orders()
         {
             InitializeComponent();
+            label3.AutoSize = false;
+            label3.Paint += Label1_Paint;
         }
 
         private void Orders_Load(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace ExampleAdoNet
                 try
                 {
                     cn.Open();
-                    string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                    string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                     "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer ";
                     NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
                     NpgsqlDataReader rdr = command.ExecuteReader();
@@ -38,8 +40,9 @@ namespace ExampleAdoNet
                         dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                         dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                         dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                        dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                        dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                         dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
+                        dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
                     }
                     cn.Close();
                 }
@@ -117,7 +120,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.first = '" + textb_first.Text + "' AND buyer.second = '" + textb_second.Text + "' AND buyer.third = '" + textb_third.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -129,9 +132,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -145,7 +149,7 @@ namespace ExampleAdoNet
                     try
                     {
                             cn.Open();
-                            string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                            string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                             "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                             "WHERE buyer.first = '" + textb_first.Text + "' AND buyer.second = '" + textb_second.Text + "'";
                             NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -157,8 +161,9 @@ namespace ExampleAdoNet
                                 dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                                 dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                                 dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                                dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                                dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                                 dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
                             }
                             cn.Close();
                        
@@ -175,7 +180,7 @@ namespace ExampleAdoNet
                     {
                         
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.first = '" + textb_first.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -187,9 +192,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                         
                     }
@@ -204,7 +210,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.first = '" + textb_first.Text + "' AND buyer.third = '" + textb_third.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -216,9 +222,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -232,7 +239,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.second = '" + textb_second.Text + "' AND buyer.third = '" + textb_third.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -244,9 +251,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -260,7 +268,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.second = '" + textb_second.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -272,9 +280,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -288,7 +297,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.third = '" + textb_third.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -300,9 +309,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -316,7 +326,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE public.order.idorder ='"+ textb_id.Text +"'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -328,9 +338,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -344,7 +355,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.telephonebuyer ='" + textb_number.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -356,9 +367,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -372,7 +384,7 @@ namespace ExampleAdoNet
                     try
                     {
                         cn.Open();
-                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                        string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                         "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer " +
                         "WHERE buyer.telephonebuyer ='" + textb_number.Text + "' AND public.order.idorder ='" + textb_id.Text + "'";
                         NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
@@ -384,9 +396,10 @@ namespace ExampleAdoNet
                             dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                             dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                             dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                            dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                             dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
-                        }
+                                dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
+                            }
                         cn.Close();
                     }
                     catch (Exception ex)
@@ -434,7 +447,7 @@ namespace ExampleAdoNet
                 try
                 {
                     cn.Open();
-                    string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.dateorder, public.order.priceoreder FROM buyer " +
+                    string strSQL = "SELECT public.order.idorder, buyer.telephonebuyer, public.order.status, public.order.date, public.order.priceoreder, public.order.tracknum FROM buyer " +
                     "INNER JOIN public.order ON buyer.idbuyer = public.order.idbuyer ";
                     NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
                     NpgsqlDataReader rdr = command.ExecuteReader();
@@ -445,8 +458,9 @@ namespace ExampleAdoNet
                         dg1.Rows[i].Cells[0].Value = (int)rdr["idorder"];
                         dg1.Rows[i].Cells[1].Value = (string)rdr["telephonebuyer"];
                         dg1.Rows[i].Cells[2].Value = (string)rdr["status"];
-                        dg1.Rows[i].Cells[3].Value = (DateTime)rdr["dateorder"];
+                        dg1.Rows[i].Cells[3].Value = (DateTime)rdr["date"];
                         dg1.Rows[i].Cells[4].Value = (double)rdr["priceoreder"];
+                        dg1.Rows[i].Cells[5].Value = (string)rdr["tracknum"];
                     }
                     cn.Close();
                 }
@@ -459,7 +473,25 @@ namespace ExampleAdoNet
 
         private void button1_Click(object sender, EventArgs e) 
         {
-            
+            Close();
+        }
+
+        private void Label1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+            e.Graphics.RotateTransform(-90);
+            SizeF textSize = e.Graphics.MeasureString(label3.Text, label3.Font);
+            label3.Width = (int)textSize.Height + 2;
+            label3.Height = (int)textSize.Width + 2;
+            e.Graphics.TranslateTransform(-label3.Height / 2, label3.Width / 2);
+            e.Graphics.DrawString(label3.Text, label3.Font, Brushes.Black, -(textSize.Width / 2), -(textSize.Height / 2));
+        }
+
+        private void dg1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+           int intto = Convert.ToInt32(dg1.SelectedRows[0].Cells[0].Value);
+           Orderedgood orderedgood = new Orderedgood(intto);
+           orderedgood.ShowDialog();
         }
     }
 }

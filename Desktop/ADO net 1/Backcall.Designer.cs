@@ -38,6 +38,7 @@ namespace ExampleAdoNet
             this.numberCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.problemCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.solveCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.refresh = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -81,18 +82,21 @@ namespace ExampleAdoNet
             // 
             // dg1
             // 
+            this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dg1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameCol,
             this.numberCol,
             this.problemCol,
-            this.solveCol});
+            this.solveCol,
+            this.idCol});
             this.dg1.Location = new System.Drawing.Point(12, 190);
             this.dg1.Name = "dg1";
             this.dg1.RowHeadersWidth = 51;
             this.dg1.RowTemplate.Height = 24;
             this.dg1.Size = new System.Drawing.Size(861, 268);
             this.dg1.TabIndex = 9;
+            this.dg1.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg1_RowHeaderMouseDoubleClick);
             // 
             // nameCol
             // 
@@ -100,7 +104,6 @@ namespace ExampleAdoNet
             this.nameCol.MinimumWidth = 6;
             this.nameCol.Name = "nameCol";
             this.nameCol.ReadOnly = true;
-            this.nameCol.Width = 125;
             // 
             // numberCol
             // 
@@ -108,21 +111,24 @@ namespace ExampleAdoNet
             this.numberCol.MinimumWidth = 6;
             this.numberCol.Name = "numberCol";
             this.numberCol.ReadOnly = true;
-            this.numberCol.Width = 200;
             // 
             // problemCol
             // 
             this.problemCol.HeaderText = "Проблема";
             this.problemCol.MinimumWidth = 6;
             this.problemCol.Name = "problemCol";
-            this.problemCol.Width = 250;
             // 
             // solveCol
             // 
             this.solveCol.HeaderText = "Решение";
             this.solveCol.MinimumWidth = 6;
             this.solveCol.Name = "solveCol";
-            this.solveCol.Width = 125;
+            // 
+            // idCol
+            // 
+            this.idCol.HeaderText = "Ид";
+            this.idCol.MinimumWidth = 6;
+            this.idCol.Name = "idCol";
             // 
             // refresh
             // 
@@ -142,16 +148,17 @@ namespace ExampleAdoNet
             this.button1.TabIndex = 11;
             this.button1.Text = "Назад";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(729, 154);
+            this.button2.Location = new System.Drawing.Point(666, 137);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 23);
+            this.button2.Size = new System.Drawing.Size(207, 40);
             this.button2.TabIndex = 12;
-            this.button2.Text = "Добавить данные";
+            this.button2.Text = "Звонки, требующие ответа";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Backcall
             // 
@@ -184,10 +191,11 @@ namespace ExampleAdoNet
         private System.Windows.Forms.DataGridView dg1;
         private System.Windows.Forms.Button refresh;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn problemCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn solveCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCol;
+        private System.Windows.Forms.Button button2;
     }
 }

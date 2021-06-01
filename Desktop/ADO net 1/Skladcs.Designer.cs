@@ -54,6 +54,7 @@ namespace ExampleAdoNet
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idCol,
@@ -74,42 +75,36 @@ namespace ExampleAdoNet
             this.idCol.HeaderText = "id товара";
             this.idCol.MinimumWidth = 6;
             this.idCol.Name = "idCol";
-            this.idCol.Width = 125;
             // 
             // nameCol
             // 
             this.nameCol.HeaderText = "название";
             this.nameCol.MinimumWidth = 6;
             this.nameCol.Name = "nameCol";
-            this.nameCol.Width = 125;
             // 
             // priceCol
             // 
             this.priceCol.HeaderText = "цена";
             this.priceCol.MinimumWidth = 6;
             this.priceCol.Name = "priceCol";
-            this.priceCol.Width = 125;
             // 
             // colvoCol
             // 
             this.colvoCol.HeaderText = "количество";
             this.colvoCol.MinimumWidth = 6;
             this.colvoCol.Name = "colvoCol";
-            this.colvoCol.Width = 125;
             // 
             // catCol
             // 
             this.catCol.HeaderText = "категория";
             this.catCol.MinimumWidth = 6;
             this.catCol.Name = "catCol";
-            this.catCol.Width = 125;
             // 
             // subcatCol
             // 
             this.subcatCol.HeaderText = "подкатегория";
             this.subcatCol.MinimumWidth = 6;
             this.subcatCol.Name = "subcatCol";
-            this.subcatCol.Width = 125;
             // 
             // label1
             // 

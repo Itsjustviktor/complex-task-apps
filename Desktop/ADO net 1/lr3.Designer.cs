@@ -51,6 +51,7 @@ namespace ExampleAdoNet
             // 
             // textBox3
             // 
+            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(30, 75);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(180, 22);
@@ -67,6 +68,7 @@ namespace ExampleAdoNet
             // 
             // textBox4
             // 
+            this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(30, 36);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(180, 22);
@@ -97,6 +99,7 @@ namespace ExampleAdoNet
             this.comboBox1.Size = new System.Drawing.Size(180, 24);
             this.comboBox1.TabIndex = 23;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // label2
             // 
@@ -114,7 +117,7 @@ namespace ExampleAdoNet
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 53);
             this.button1.TabIndex = 25;
-            this.button1.Text = "Добавить";
+            this.button1.Text = "Обновить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

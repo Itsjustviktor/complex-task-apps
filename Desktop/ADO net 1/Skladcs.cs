@@ -57,17 +57,6 @@ namespace ExampleAdoNet
                         dataGridView1.Rows[i].Cells[5].Value = (string)rdr["subcategory"];
                     }
                     cn.Close();
-
-                    //cn.Open();
-                    //strSQL = "select name from good order by name desc";
-                    //NpgsqlCommand cmd = new NpgsqlCommand(strSQL, cn);
-                    //NpgsqlDataReader rdr1 = cmd.ExecuteReader();
-                    //int j = 0;
-                    //while (rdr1.Read())
-                    //{
-                    //    comboBox1.Items.Insert(j, rdr1["name"]);
-                    //}
-                    //cn.Close();
                 }
                 catch (Exception ex)
                 {

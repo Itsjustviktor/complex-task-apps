@@ -13,43 +13,49 @@ namespace ExampleAdoNet
 {
     public partial class Form1 : Form
     {
+        NpgsqlConnection cn;
+        string connectionString = "Server=localhost; Port=5432; User Id=postgres; Password=1234; Database=inetmagaz";
         public Form1()
         {
             InitializeComponent();
-            textBox_addres.Text = "localhost";
-            textBox_port.Text = "5432";
-            textBox_user.Text = "postgres";
-            textBox_pass.Text = "1234";
-            textBox_database.Text = "inetmagaz";
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //using (cn = new NpgsqlConnection(connectionString))
+            //{
+            //    try
+            //    {
+            //        cn.Open();
+            //        string strSQL = "SELECT idemployee, password, FROM buyer";
+            //        NpgsqlCommand command = new NpgsqlCommand(strSQL, cn);
+            //        NpgsqlDataReader rdr = command.ExecuteReader();
+            //        while (rdr.Read())
+            //        {
+            //        }
+            //        cn.Close();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+        }
         private void btn_ConnDB_Click(object sender, EventArgs e)
         {
-            /*string server = "Server=" + textBox_addres.Text+";";
-            string port = "Port=" + textBox_port.Text + ";";
-            string user = "User Id=" + textBox_user.Text + ";";
-            string pass = "Password=" + textBox_pass.Text + ";";
-            string data = "Database=" + textBox_database.Text + ";";
-            try
-            {
-
-                NpgsqlConnection connection = new NpgsqlConnection(server+port+user+pass+data);
-                connection.Open();
-                textBox_result.Text = "Подключение к БД " + connection.Database + " выполнено";
-                Manager Manager = new Manager();
-                Manager.Show();
-            }
-            catch
-            {
-                MessageBox.Show("Не удалось подключиться((((");
-            }*/
             Manager Manager = new Manager();
             Hide();
             Manager.ShowDialog();
             Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -48,5 +48,10 @@ namespace ExampleAdoNet
             add.ShowDialog();
             Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
